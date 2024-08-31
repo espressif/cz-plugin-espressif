@@ -1,0 +1,21 @@
+---
+version: 2
+
+updates:
+  - package-ecosystem: "pip"
+    versioning-strategy: increase-if-necessary
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "sunday"
+    commit-message:
+      prefix: "ci(dependabot-pip): "
+    assignees: ["tomassebestik"]
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "sunday"
+      prefix: "ci(dependabot-actions): "
+    assignees: ["tomassebestik"]

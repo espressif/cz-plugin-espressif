@@ -1,0 +1,9 @@
+# Code owners for the entire repository
+*                                       @tomassebestik @kumekay
+
+# Code owners for individual files
+Justfile                                @tomassebestik
+
+# Code owners for an entire directory and its subdirectories
+.github/ISSUE_TEMPLATE/                 @tomassebestik
+.github/PULL_REQUEST_TEMPLATE           @tomassebestik

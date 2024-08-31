@@ -1,0 +1,83 @@
+---
+# Run `pre-commit autoupdate` to update to the latest pre-commit hooks version.
+minimum_pre_commit_version: 3.3.0 # Specifies the minimum version of pre-commit required for this configuration
+default_install_hook_types: [pre-commit, commit-msg] # Default hook types to install if not specified in individual hooks
+default_stages: [commit]
+
+repos:
+  - repo: meta
+    hooks:
+      - id: check-hooks-apply
+      - id: check-useless-excludes
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: trailing-whitespace # Removes trailing whitespaces from lines
+      - id: end-of-file-fixer # Ensures files end with a newline
+      - id: check-shebang-scripts-are-executable # Checks that scripts with shebangs are executable.
+      - id: check-case-conflict # Check conflict on a case-insensitive filesystem (MacOS HFS+/Windows FAT).
+      - id: mixed-line-ending # Detects mixed line endings (CRLF/LF)
+        args: ["-f=lf"] # Forces files to use LF line endings
+
+  - repo: https://github.com/pylint-dev/pylint
+    rev: v3.2.6
+    hooks:
+      - id: pylint # Runs pylint on Python code
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.6.3
+    hooks:
+      - id: ruff # Linter
+        args: [--fix, --exit-non-zero-on-fix]
+      - id: ruff-format # Formatter (replaces Black)
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.11.2
+    hooks:
+      - id: mypy # Runs mypy for Python type checking
+
+  - repo: https://github.com/espressif/conventional-precommit-linter
+    rev: v1.10.0
+    hooks:
+      - id: conventional-precommit-linter # Lints commit messages for conventional format
+
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.3.0
+    hooks:
+      - id: codespell # Code spell checker
+        args: ["--write-changes"]
+        additional_dependencies: [tomli]
+
+  - repo: https://github.com/executablebooks/mdformat
+    rev: 0.7.17
+    hooks:
+      - id: mdformat
+        args: [--number] # Keep numbering for ordered lists
+        additional_dependencies:
+          - mdformat-gfm # Support for GitHub Flavored Markdown (GFM), including tables, task lists, strikethroughs, and autolinks.
+          - mdformat-ruff # Formats Python code blocks in Markdown files according to the `ruff` linter's style.
+          - mdformat-simple-breaks # Ensures that single line breaks in Markdown are converted to `<br>` t
+
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.5.0
+    hooks:
+      - id: detect-secrets
+        args:
+          - --base64-limit=4 # Level of entropy for base64 type strings
+          - --hex-limit=3 # Level of entropy for hex strings
+
+  - repo: https://github.com/lyz-code/yamlfix/
+    rev: 1.17.0
+    hooks:
+      - id: yamlfix
+
+  # Local hooks
+  - repo: local
+    hooks:
+      - id: pip-compile # Generate locked requirements.txt for production (Dockerfile)
+        name: compile requirements.txt
+        entry: bash -c 'pip-compile --strip-extras --output-file=requirements.txt pyproject.toml > /dev/null'
+        language: system
+        pass_filenames: false
+        files: requirements.txt|pyproject.toml
