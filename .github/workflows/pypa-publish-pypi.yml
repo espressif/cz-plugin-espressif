@@ -1,23 +1,13 @@
 ---
-# This workflow will upload a Python Package using PYPA GiHub Action.
-# For more information see: https://github.com/pypa/gh-action-pypi-publish
 name: PyPI release
 
 on:
   release:
     types: [created]
-  workflow_dispatch:
-    inputs:
-      tag_name:
-        description: 'Tag name to release'
-        required: false
 
 jobs:
   pypi-build-publish:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ['3.9', '3.10', '3.11', '3.12']
 
     steps:
       - name: Checkout repository
@@ -26,19 +16,10 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.python-version }}
-
-      - name: Get tag name from input or Git
-        id: get_tag
-        run: |
-          if [ "${{ github.event.inputs.tag_name }}" ]; then
-            echo "TAG=${{ github.event.inputs.tag_name }}" >> $GITHUB_ENV
-          else
-            echo "TAG=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
-          fi
+          python-version: '3.9'
 
       - name: Display tag
-        run: echo "Releasing version $TAG"
+        run: echo "Releasing version ${{ github.ref_name }}"
 
       - name: Install dependencies
         run: |-
@@ -46,8 +27,7 @@ jobs:
           pip install build
 
       - name: Build package
-        run: |-
-          python -m build
+        run: python -m build
 
       - name: Publish package distributions to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1

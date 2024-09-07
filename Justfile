@@ -13,7 +13,12 @@ exit:
 
 # Activate virtual environment
 activate-venv:
-    if [ -d "venv" ]; then source venv/bin/activate; else echo "Virtual environment not found. Please create it first."; fi
+    . venv/bin/activate || . .venv/bin/activate
+
+# Remove virtual environment
+remove-venv:
+    rm -rf venv
+    rm -rf .venv
 
 # Reinstall development dependencies in virtual environment
 reinstall-venv:
@@ -21,7 +26,7 @@ reinstall-venv:
 
 # Clean temporary and cache files
 clean-temps:
-    rm -rf .mypy_cache/ .ruff_cache/ cz_plugin_espressif/cz_plugin_espressif.egg-info
+    find . -type d \( -name '.mypy_cache' -o -name '.ruff_cache' -o -name 'build' -o -name 'dist' \) -exec rm -rf {} +
 
 # Set up the environment: activate and reinstall
 setup-env:
