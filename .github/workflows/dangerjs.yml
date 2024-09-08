@@ -5,12 +5,13 @@ on:
   pull_request_target:
     types: [opened, edited, reopened, synchronize]
 
+permissions:
+  pull-requests: write
+  contents: write
+
 jobs:
   pull-request-style-linter:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pull-requests: write
     steps:
       - name: Check out PR head
         uses: actions/checkout@v4
