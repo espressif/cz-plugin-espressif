@@ -4,6 +4,11 @@ name: PyPI release
 on:
   release:
     types: [created]
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: 'Tag name to release'
+        required: false
 
 jobs:
   pypi-build-publish:
@@ -16,10 +21,19 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.9'
+          python-version: ${{ matrix.python-version }}
+
+      - name: Get tag name from input or Git
+        id: get_tag
+        run: |
+          if [ "${{ github.event.inputs.tag_name }}" ]; then
+            echo "TAG=${{ github.event.inputs.tag_name }}" >> $GITHUB_ENV
+          else
+            echo "TAG=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
+          fi
 
       - name: Display tag
-        run: echo "Releasing version ${{ github.ref_name }}"
+        run: echo "Releasing version $TAG"
 
       - name: Install dependencies
         run: |-
