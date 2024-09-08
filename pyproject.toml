@@ -16,7 +16,7 @@
         "Programming Language :: Python :: 3.11",
         "Programming Language :: Python :: 3.12",
     ]
-    dependencies = ["commitizen>=3.21.3"]
+    dependencies = ["commitizen>=3.29.0"]
     description = "Commitizen tools plugin with Espressif code style"
     dynamic = ["version"]
     license = { file = "LICENSE" }
@@ -28,7 +28,6 @@
     [project.optional-dependencies]
         dev = [
             "twine~=5.1.1",
-            "pre-commit~=3.3.0",
             "pip-tools~=7.3",
             "pytest-cov~=4.1.0",
             "pytest~=7.4.0",

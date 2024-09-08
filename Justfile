@@ -11,9 +11,18 @@ default:
 exit:
     exit 0
 
-# Activate virtual environment
-activate-venv:
-    . venv/bin/activate || . .venv/bin/activate
+build-install:
+    pip uninstall -y czespressif
+    python -m build
+    pip install .
+    cz example
+    pip list | grep czespressif
+
+install:
+    pip uninstall -y czespressif
+    pip install -e .
+    cz example
+    pip list | grep czespressif
 
 # Remove virtual environment
 remove-venv:

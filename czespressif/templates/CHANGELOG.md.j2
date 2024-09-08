@@ -1,6 +1,6 @@
 {# ---MACROS AND CODE START #}
 {% macro print_commit(change) %}{# MACRO needs to be all on one line #}
-{% if change.scope %}- **{{ change.scope }}**: {{ change.message }} - *{{ change.author }} ({{ change.sha1[:7] }})*{% else %}{% if change.message %}- {{ change.message }} - *{{ change.author }} ({{ change.sha1[:7] }})*{% endif %}{% endif %}
+{% if change.scope %}- **{{ change.scope }}**: {{ change.message }} {% if config.changelog_show_authors %} *({{ change.author }})*{% endif %}{% if config.changelog_show_commits %} *({{ change.sha1[:7] }})*{% endif %}{% else %}{% if change.message %} {{ change.message }} {% if config.changelog_show_authors %} *({{ change.author }})*{% endif %}{% if config.changelog_show_commits %} *({{ change.sha1[:7] }})*{% endif %}{% endif %}{% endif %}
 {% endmacro %}{# MACRO needs to be all on one line #}
 {#    MACROS AND CODE END--- #}
 
@@ -15,7 +15,7 @@
 
 {# ---BODY START #}
 {% for entry in tree %}{# ---BLOCK release version #}
-{% if not (entry.version == 'Unreleased' and not config.include_unreleased) %}
+{% if not (entry.version == 'Unreleased' and not config.changelog_unreleased) %}
 ## {{ entry.version }}{% if entry.date %} ({{ entry.date }}){% endif %}
 {% for change_key, changes in entry.changes.items() %}{# ---BLOCK sections #}
 
@@ -28,7 +28,9 @@
 {% endfor %}{# BLOCK sections--- #}
 
 {# keep empty line above this comment #}
+{% if config.changelog_section_line %}{# ---SECTION LINE START #}
 ---
+{% endif %}{#    SECTION LINE  END--- #}
 
 {% endif %}
 {# keep empty line above this comment #}
@@ -37,3 +39,7 @@
 {% if config.changelog_footer %}{# ---FOOTER START #}
 {{ config.changelog_footer }}
 {% endif %}{#    FOOTER END--- #}
+
+
+
+{% if config.changelog_show_authors %}{% endif %}

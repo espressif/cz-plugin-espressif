@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import re
 import sys
 
 from dataclasses import dataclass
@@ -10,7 +9,6 @@ from functools import cached_property
 from functools import total_ordering
 from typing import Dict
 from typing import List
-from typing import Literal
 from typing import Union
 
 from commitizen.config import read_cfg
@@ -19,10 +17,8 @@ from commitizen.defaults import Settings
 from czespressif.defaults import CHANGELOG_FOOTER
 from czespressif.defaults import CHANGELOG_HEADER
 from czespressif.defaults import CHANGELOG_TITLE
+from czespressif.defaults import INCREMENT
 from czespressif.defaults import TYPES
-
-RE_HTTP = re.compile(r'(?P<server>https?://.+)/(?P<repository>[^/]+/[^/]+/?)')
-INCREMENT = Literal['MAJOR', 'MINOR', 'PATCH']
 
 
 @dataclass
@@ -73,19 +69,16 @@ class CommitType:
 
 
 class CzEspressifSettings(Settings):
-    types: Union[list[dict], None]  # The list of accepted types
-    extra_types: Union[list[dict], None]  # A list of additional types (permit addition without losing defaults)
-    github: Union[str, None]
-    gitlab: Union[str, None]
-    jira_url: Union[str, None]
-    jira_prefixes: Union[list[str], None]
-    order_by_scope: Union[bool, None]
-    group_by_scope: Union[bool, None]
-    include_unreleased: Union[bool, None]
+    types: Union[list[dict], None]
+    extra_types: Union[list[dict], None]
+    changelog_unreleased: Union[bool, None]
     use_emoji: Union[bool, None]
     changelog_title: Union[str, None]
     changelog_header: Union[str, None]
     changelog_footer: Union[str, None]
+    changelog_section_line: Union[bool, None]
+    changelog_show_commits: Union[bool, None]
+    changelog_show_authors: Union[bool, None]
 
 
 @dataclass
@@ -104,59 +97,13 @@ class CzEspressifConfig:
     def known_types(self) -> list[CommitType]:
         return self.types + self.extra_types
 
-    @cached_property
-    def github(self) -> Union[str, None]:
-        repository = self.settings.get('github')
-        if not repository:
-            return None
-        match = RE_HTTP.match(repository)
-        return match.group('repository') if match else repository
-
-    @cached_property
-    def github_url(self) -> str:
-        repository = self.settings.get('github')
-        if repository:
-            match = RE_HTTP.match(repository)
-            if match:
-                return match.group('server')
-        return 'https://github.com'
-
-    @cached_property
-    def gitlab(self) -> Union[str, None]:
-        repository = self.settings.get('gitlab')
-        if not repository:
-            return None
-        match = RE_HTTP.match(repository)
-        return match.group('repository') if match else repository
-
-    @cached_property
-    def gitlab_url(self) -> str:
-        repository = self.settings.get('gitlab')
-        if repository:
-            match = RE_HTTP.match(repository)
-            if match:
-                return match.group('server')
-        return 'https://gitlab.com'
-
-    @cached_property
-    def jira_url(self) -> Union[str, None]:
-        return self.settings.get('jira_url')
-
-    @cached_property
-    def jira_prefixes(self) -> list[str]:
-        return self.settings.get('jira_prefixes', [])
-
     @property
     def incremental(self) -> bool:
         return '--incremental' in sys.argv
 
     @property
-    def order_by_scope(self) -> bool:
-        return self.settings.get('order_by_scope') or False
-
-    @property
-    def include_unreleased(self) -> bool:
-        return self.settings.get('include_unreleased', True)
+    def changelog_unreleased(self) -> bool:
+        return self.settings.get('changelog_unreleased', True)
 
     @property
     def use_emoji(self) -> bool:
@@ -174,6 +121,14 @@ class CzEspressifConfig:
     def changelog_footer(self) -> str:
         return self.settings.get('changelog_footer', CHANGELOG_FOOTER)
 
-    # @property
-    # def bump_message(self) -> str:
-    #     if not
+    @property
+    def changelog_section_line(self) -> bool:
+        return self.settings.get('changelog_section_line', True)
+
+    @property
+    def changelog_show_commits(self) -> bool:
+        return self.settings.get('changelog_show_commits', True)
+
+    @property
+    def changelog_show_authors(self) -> bool:
+        return self.settings.get('changelog_show_authors', True)
