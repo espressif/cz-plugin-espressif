@@ -90,7 +90,7 @@ TYPES: List[Dict] = [  # this is order in changelog
     },
 ]
 
-CHANGELOG_TITLE: str = 'Changelog'
+CHANGELOG_TITLE: str = 'CHANGELOG'
 
 CHANGELOG_HEADER: str = """
 > All notable changes to this project are documented in this file. The list is not exhaustive,
@@ -99,10 +99,10 @@ CHANGELOG_HEADER: str = """
 <sub>The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), \
     [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and \
     [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
-    </sub>---"""
+</sub>---"""
 
 
-CHANGELOG_FOOTER: str = f"""**[Espressif Systems CO LTD. ({datetime.now().year})](https://www.espressif.com/)**
+CHANGELOG_FOOTER: str = f"""**[Espressif Systems CO LTD. ({datetime.now().year})](https://www.espressif.com/)**\n
 - [Commitizen tools plugin with Espressif code style](https://www.github.com/espressif/cz-plugin-espressif)
 - [Espressif Coding Standards and Best Practices](https://www.github.com/espressif/standards)"""
 
@@ -110,3 +110,5 @@ INCREMENT = Literal['MAJOR', 'MINOR', 'PATCH']
 
 # Currently BUMP_MESSAGE not possible to define default here - if not provided from pyproject.toml, it will be commitizen default, not ours :(
 BUMP_MESSAGE: str = 'change(bump): release $current_version → $new_version [skip-ci]'
+
+ESCAPE_MARKDOWN_SEQ: List[str] = [r'_{', r'}_']

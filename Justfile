@@ -24,6 +24,22 @@ install:
     cz example
     pip list | grep czespressif
 
+venv39:
+    /usr/bin/python3.9 -m venv venv
+    . venv/bin/activate
+
+venv310:
+    /usr/bin/python3.10 -m venv venv
+    . venv/bin/activate
+
+venv311:
+    /usr/bin/python3.11 -m venv venv
+    . venv/bin/activate
+
+venv312:
+    /usr/bin/python3.12 -m venv venv
+    . venv/bin/activate
+
 # Remove virtual environment
 remove-venv:
     rm -rf venv
@@ -35,7 +51,7 @@ reinstall-venv:
 
 # Clean temporary and cache files
 clean-temps:
-    find . -type d \( -name '.mypy_cache' -o -name '.ruff_cache' -o -name 'build' -o -name 'dist' \) -exec rm -rf {} +
+    rm -rf .pytest_cache .mypy_cache .nox .ruff_cache .tox build dist
 
 # Set up the environment: activate and reinstall
 setup-env:

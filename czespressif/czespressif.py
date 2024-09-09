@@ -1,4 +1,5 @@
 import itertools
+import re
 
 from collections import OrderedDict
 from typing import Any
@@ -12,9 +13,10 @@ from commitizen.cz.base import BaseConfig
 from commitizen.defaults import Questions
 from jinja2 import PackageLoader
 
-from czespressif.config import INCREMENT
 from czespressif.config import CommitType
 from czespressif.config import CzEspressifConfig
+from czespressif.defaults import ESCAPE_MARKDOWN_SEQ
+from czespressif.defaults import INCREMENT
 from czespressif.example import build_example
 from czespressif.example import build_info
 from czespressif.questions import get_questions
@@ -130,6 +132,14 @@ class CzPluginEspressif(BaseCommitizen):  # pylint: disable=abstract-method
 
         return message
 
+    def wrap_problematic_parts(self, message: str) -> str:
+        """Escape problematic underscores near curly braces without altering other underscores."""
+        # Dynamically build regex pattern to handle all known issues
+        for issue in ESCAPE_MARKDOWN_SEQ:
+            # For each known issue, replace underscores with escaped underscores
+            message = re.sub(issue, lambda match: match.group(0).replace('_', r'\_'), message)
+        return message
+
     def changelog_message_builder_hook(self, parsed_message: Dict[str, Any], commit: Any) -> Union[Dict[str, Any], Iterable[Dict[str, Any]], None]:  # pylint: disable=unused-argument
         # Remap breaking changes type
         if parsed_message.get('breaking'):
@@ -142,12 +152,18 @@ class CzPluginEspressif(BaseCommitizen):  # pylint: disable=abstract-method
         if not included_in_changelog:
             commit_type = self.known_types.get(parsed_message['change_type'])
             if commit_type and commit_type.changelog:
+                # Apply the escaping to the parsed message
+                parsed_message['message'] = self.wrap_problematic_parts(parsed_message['message'])
                 return parsed_message
             return None
 
         # Filter out all commit types not explicitly included in `types_in_changelog`
         if parsed_message['change_type'] not in included_in_changelog:
             return None
+
+        # Apply the escaping to the parsed message
+        parsed_message['message'] = self.wrap_problematic_parts(parsed_message['message'])
+
         return parsed_message
 
     def changelog_hook(self, full: str, partial: Union[str, None]) -> str:
