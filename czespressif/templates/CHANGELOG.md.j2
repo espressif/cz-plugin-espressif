@@ -4,14 +4,6 @@
 {% endmacro %}{# MACRO needs to be all on one line #}
 {#    MACROS AND CODE END--- #}
 
-
-{% if config.changelog_title %}{# ---TITLE START #}
-# {{ config.changelog_title }}
-{% endif %}{#    TITLE END--- #}
-{% if config.changelog_header %}{# ---HEADER START #}
-{{ config.changelog_header }}
-{% endif %}{#    HEADER END--- #}
-
 {# ---BODY START #}
 {% for entry in tree %}{# ---BLOCK release version #}
 {% if not (entry.version == 'Unreleased' and not config.changelog_unreleased) %}
@@ -37,10 +29,3 @@
 {# keep empty line above this comment #}
 {% endfor %}{# BLOCK release vesion--- #}
 {#    BODY END--- #}
-{% if config.changelog_footer %}{# ---FOOTER START #}
-{{ config.changelog_footer }}
-{% endif %}{#    FOOTER END--- #}
-
-
-
-{% if config.changelog_show_authors %}{% endif %}
