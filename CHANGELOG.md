@@ -8,6 +8,18 @@
 
 ---
 
+## Unreleased
+
+### 🚨 Breaking changes
+
+- This will trigger a major version bump *(Tomas Sebestik - 8b702d6)*
+
+### 📖 Documentation
+
+- **readme**: update GitHub badges, add pypi and compatible python *(Tomas Sebestik - 8b702d6)*
+
+---
+
 ## v0.3.1 (2024-09-10)
 
 ---
