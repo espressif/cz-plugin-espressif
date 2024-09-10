@@ -145,46 +145,76 @@ Config is accepted in `pyproject.toml` (priority, following example), `.cz.toml`
 ```ini
 [tool.commitizen]
     ...
-    changelog_title = "Our changelog"  # custom text of changelog title
-    changelog_header = "This is our changelog.\nAll cool things we do are here.\n\nPlease read it."  # custom text of changelog header
-    changelog_footer = "This is the end of our changelog.\n\nMore cool things are coming."  # custom text of changelog footer
-    changelog_section_line = false  # default (true); false = removes horizontal lines between releases
-    changelog_unreleased = false  # default (true); false = removes section Unreleased, keeps only releases
-    changelog_show_authors = false # default (true); false = removes authors of the changes (commit)
-    changelog_show_commits = false # default (true); false = removes commit short sha of the changes
 
-    change_type_order = [  # in which order sections goes in changelog; if you use emojis include them | this here is default order
+    # - Section emojis in the changelog, emojis in CLI command `cz commit` -
+    # Default: true; false = do not display emojis
+    # Note: Emojis are never added in the commit messages.
+    use_emoji = false
+
+    # - Custom text of changelog title -
+    # Note: "" (empty string) disables title
+    changelog_title = "Our changelog"
+
+    # - Custom text of changelog header -
+    # Note: "" (empty string) disables header
+    changelog_header = "This is our changelog.\nAll cool things we do are here.\n\nPlease read it."
+
+    # - Custom text of changelog footer -
+    # Note: "" (empty string) disables footer
+    changelog_footer = "This is the end of our changelog.\n\nMore cool things are coming."
+
+    # - Horizontal lines between release sections in the changelog -
+    # Default: true; false = removes lines
+    changelog_section_line = false  # default (true); false = removes horizontal lines between releases
+
+    # - Section "Unreleased" in the changelog -
+    # Default: true; false = removes section Unreleased, keeps only releases
+    changelog_unreleased = false
+
+    # - Authors of the changes (commits) in the changelog -
+    # Default: true; false = do not display authors
+    changelog_show_authors = false
+
+    # - Commit numbers (short SHA) in the changelog -
+    # Default: true; false = do not display commit numbers
+    changelog_show_commits = false
+
+    # - Change orders in which sections displays in the changelog -
+    # Default: this example is default
+    change_type_order = [ # with enabled emojis
         '🚨 Breaking changes',
         '✨ New features',
         '🐛 Bug fixes',
         '📖 Documentation',
-        '🏗️ Changes',
-        '🔧 Refactoring',
+        '🔧 Code refactoring',
         '🗑️ Removals',
-        '⚙️ CI and project settings',
-        '🚦 Testing',
-        '🔙 Reverted',
+        '🏗️ Changes',  # in default not in the changelog
+        '⚙️ CI and project settings',    # in default not in the changelog
+        '🚦 Testing',  # in default not in the changelog
+        '🔙 Reverted',  # in default not in the changelog
     ]
 
-    change_type_order = [  # same, with disabled emojis | this here is default order
+    change_type_order = [  # same thing, with disabled emojis
         'Breaking changes',
         'New features',
         'Bug fixes',
         'Documentation',
-        'Changes',
-        'Refactoring',
+        'Code refactoring',
         'Removals',
-        'CI and project settings',
-        'Testing',
-        'Reverted',
+        'Changes',  # in default not in the changelog
+        'CI and project settings',  # in default not in the changelog
+        'Testing',  # in default not in the changelog
+        'Reverted',  # in default not in the changelog
     ]
 
-    change_type_map = # dependent on mapping in default types, only types with "changelog = True"
-    types_in_changelog = ["feat", "fix", "refactor", "style", "ci"] # redefine which types are shown in changelog
+    # - Redefine which types are shown in the changelog -
+    # Note: You need to list here ALL types that you want to have in the changelog - included default ones
+    # Note: The order in this list doesn't matter — if you want to change the sections' order too, use with "change_type_order."
+    types_in_changelog = ["feat", "fix", "refactor", "style", "ci"]
 
-    use_emoji = false  # default (true); false = removes emojis from changelog and commit UI (emojis are never added in the commit messages)
-
-    [[tool.commitizen.extra_types]]  # add extra types for 'cz commit' and changelog
+    # - Add extra commit types for 'cz commit' and to the changelog (sections) -
+    # Note: If you are working with custom commit types, ensure your commit linter and PR/MR linter is set same way
+    [[tool.commitizen.extra_types]]
         type        = "style"
         heading     = "Code Style"
         emoji       = "🎨"
