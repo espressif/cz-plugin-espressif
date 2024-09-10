@@ -10,6 +10,10 @@
 
 ## Unreleased
 
+### ✨ New features
+
+- add pre-commit hook for autoupdate CHANGELOG *(Tomas Sebestik - 8fd458b)*
+
 ### 🐛 Bug fixes
 
 - **changelog**: fix custom header,title,footer, update defaults *(Tomas Sebestik - ed9b8f3)*
