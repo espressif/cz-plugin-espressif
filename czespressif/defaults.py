@@ -41,20 +41,12 @@ TYPES: List[Dict] = [  # this is order in changelog
         'changelog': True,
     },
     {
-        'type': 'change',
-        'description': 'A change made to the codebase.',
-        'heading': 'Changes',
-        'emoji': '🏗️',
-        'bump': 'PATCH',
-        'changelog': True,
-    },
-    {
         'type': 'refactor',
         'description': 'A changeset neither fixing a bug nor adding a feature',
-        'heading': 'Refactoring',
+        'heading': 'Code refactoring',
         'emoji': '🔧',
         'bump': 'PATCH',
-        'changelog': False,
+        'changelog': True,
     },
     {
         'type': 'remove',
@@ -63,6 +55,14 @@ TYPES: List[Dict] = [  # this is order in changelog
         'emoji': '🗑️',
         'bump': 'PATCH',
         'changelog': True,
+    },
+    {
+        'type': 'change',
+        'description': 'A change made to the codebase.',
+        'heading': 'Changes',
+        'emoji': '🏗️',
+        'bump': 'PATCH',
+        'changelog': False,
     },
     {
         'type': 'ci',

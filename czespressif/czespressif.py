@@ -16,9 +16,6 @@ from jinja2 import PackageLoader
 
 from czespressif.config import CommitType
 from czespressif.config import CzEspressifConfig
-from czespressif.defaults import CHANGELOG_FOOTER
-from czespressif.defaults import CHANGELOG_HEADER
-from czespressif.defaults import CHANGELOG_TITLE
 from czespressif.defaults import ESCAPE_MARKDOWN_SEQ
 from czespressif.defaults import INCREMENT
 from czespressif.example import build_example
@@ -172,14 +169,12 @@ class CzPluginEspressif(BaseCommitizen):  # pylint: disable=abstract-method
 
     def changelog_hook(self, full: str, partial: Union[str, None]) -> str:
         """Process resulting changelog to keep 1 empty line at the end of the file."""
-
         if 'bump' in sys.argv:  # no headers
             changelog = full
         elif partial:  # no headers
             changelog = partial
         else:  # add title, header and footer
-            changelog = f'# {CHANGELOG_TITLE}\n{CHANGELOG_HEADER}\n\n{full}{CHANGELOG_FOOTER}'
-
+            changelog = f'# {self.cze_config.changelog_title}\n{self.cze_config.changelog_header}\n\n{full}{self.cze_config.changelog_footer}'
         return changelog.rstrip() + '\n'
 
     def example(self) -> str:
