@@ -8,6 +8,14 @@
 
 ---
 
+## Unreleased
+
+### 🐛 Bug fixes
+
+- **pre-commit**: change lang from system to python to be able install deps *(Tomas Sebestik - 7443af0)*
+
+---
+
 ## v1.0.0 (2024-09-10)
 
 ### ✨ New features
