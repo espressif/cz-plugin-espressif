@@ -1,6 +1,5 @@
 import itertools
 import re
-import sys
 
 from collections import OrderedDict
 from typing import Any
@@ -24,7 +23,6 @@ from czespressif.questions import get_questions
 
 
 class CzPluginEspressif(BaseCommitizen):  # pylint: disable=abstract-method
-    template = 'CHANGELOG.md.j2'
     template_loader = PackageLoader('czespressif', 'templates')
 
     def __init__(self, config: BaseConfig):
@@ -33,11 +31,7 @@ class CzPluginEspressif(BaseCommitizen):  # pylint: disable=abstract-method
 
     @property
     def known_types(self) -> Dict[str, CommitType]:
-        return dict(
-            itertools.chain(
-                ((t.type, t) for t in self.cze_config.known_types),
-            )
-        )
+        return dict(itertools.chain(((t.type, t) for t in self.cze_config.known_types)))
 
     @property
     def re_known_types(self) -> str:
@@ -169,12 +163,7 @@ class CzPluginEspressif(BaseCommitizen):  # pylint: disable=abstract-method
 
     def changelog_hook(self, full: str, partial: Union[str, None]) -> str:
         """Process resulting changelog to keep 1 empty line at the end of the file."""
-        if 'bump' in sys.argv:  # no headers
-            changelog = full
-        elif partial:  # no headers
-            changelog = partial
-        else:  # add title, header and footer
-            changelog = f'# {self.cze_config.changelog_title}\n{self.cze_config.changelog_header}\n\n{full}{self.cze_config.changelog_footer}'
+        changelog = partial or full
         return changelog.rstrip() + '\n'
 
     def example(self) -> str:

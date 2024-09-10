@@ -1,8 +1,6 @@
-<div align="center">
-  <h1>Commitizen Espressif style plugin </h1>
-    Commitizen tools plugin with Espressif code style
-  <br>
-  <br>
+<a href="https://www.espressif.com">
+    <img src="czespressif/templates/espressif-logo.svg" align="right" height="20" />
+</a>
 
 [![Release][release-badge]][release-url] [![Pre-commit][pre-commit-badge]][pre-commit-url] [![Conventional Commits][conventional-badge]][conventional-url] [![PYPI version][pypiversion-badge]][pypiversion-url] [![Python compatible][pypipythons-badge]][pypipythons-url]
 

@@ -79,6 +79,7 @@ class CzEspressifSettings(Settings):
     changelog_section_line: Union[bool, None]
     changelog_show_commits: Union[bool, None]
     changelog_show_authors: Union[bool, None]
+    release_notes_footer: Union[str, None]
 
 
 @dataclass
@@ -132,3 +133,7 @@ class CzEspressifConfig:
     @property
     def changelog_show_authors(self) -> bool:
         return self.settings.get('changelog_show_authors', True)
+
+    @property
+    def release_notes_footer(self) -> str:
+        return self.settings.get('release_notes_footer', None)
