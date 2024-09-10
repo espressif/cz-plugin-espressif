@@ -4,7 +4,7 @@
   <br>
   <br>
 
-[![Release][release-badge]][release-url] [![Pre-commit][pre-commit-badge]][pre-commit-url] [![Conventional Commits][conventional-badge]][conventional-url]
+[![Release][release-badge]][release-url] [![Pre-commit][pre-commit-badge]][pre-commit-url] [![Conventional Commits][conventional-badge]][conventional-url] [![PYPI version][pypiversion-badge]][pypiversion-url] [![Python compatible][pypipythons-badge]][pypipythons-url]
 
 </div>
 <hr>
@@ -259,5 +259,9 @@ This repository is licensed under the [Apache 2.0 License](LICENSE).
 [conventional-url]: https://conventionalcommits.org
 [pre-commit-badge]: https://img.shields.io/badge/pre--commit-enabled-brightgreen?style=flat-square&logo=pre-commit&logoColor=white
 [pre-commit-url]: https://github.com/pre-commit/pre-commit
+[pypipythons-badge]: https://img.shields.io/badge/dynamic/yaml?url=https://raw.githubusercontent.com/espressif/cz-plugin-espressif/master/.github/workflows/pypa-publish-pypi.yml&query=$.jobs%5B'pypi-build-publish'%5D.strategy.matrix%5B'python-version'%5D&label=Python&logo=python&color=3366ff&logoColor=ffcc00&labelColor=383838
+[pypipythons-url]: https://pypi.org/project/czespressif/#files
+[pypiversion-badge]: https://img.shields.io/pypi/v/czespressif?labelColor=383838
+[pypiversion-url]: https://pypi.org/project/czespressif/
 [release-badge]: https://img.shields.io/github/v/release/espressif/cz-plugin-espressif
 [release-url]: https://github.com/espressif/cz-plugin-espressif/releases
