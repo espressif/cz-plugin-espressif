@@ -19,6 +19,7 @@
   - [Minimal setup](#minimal-setup)
   - [Optimal setup](#optimal-setup)
   - [Additional configurable parameters](#additional-configurable-parameters)
+- [Pre-commit hook](#pre-commit-hook)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -224,6 +225,23 @@ Config is accepted in `pyproject.toml` (priority, following example), `.cz.toml`
 ```
 
 ---
+
+## Pre-commit hook
+
+To automatically keep your changelog's "Unreleased" section up to date, add the following to your `.pre-commit-config.yaml` file:
+
+```yaml
+- repo: https://github.com/espressif/cz-plugin-espressif
+  rev: ""
+  hooks:
+    - id: update-changelog
+```
+
+Next, run the following command to fetch the latest version (`rev:`):
+
+```sh
+pre-commit autoupdate --repo https://github.com/espressif/cz-plugin-espressif
+```
 
 ## Contributing
 

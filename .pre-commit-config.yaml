@@ -81,3 +81,11 @@ repos:
         language: system
         pass_filenames: false
         files: requirements.txt|pyproject.toml
+
+  - repo: local
+    hooks:
+      - id: update-changelog # Update changelog, section Unreleased
+        name: update changelog
+        entry: bash -c 'cz changelog > /dev/null'
+        language: system
+        pass_filenames: false
