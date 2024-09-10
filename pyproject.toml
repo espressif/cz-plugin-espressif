@@ -53,6 +53,9 @@
 [tool.setuptools.package-data]
     czespressif = ["*.py", "templates/*"]
 
+[tool.setuptools.dynamic]
+    version = { attr = "czespressif.__init__.__version__" }
+
 [tool.codespell]
     skip = 'tests/*'
 
@@ -127,4 +130,5 @@
     tag_format                 = "v$version"
     update_changelog_on_bump   = true
     version                    = "0.3.0"
+    version_files              = ["czespressif/__init__.py:__version__"]
     version_provider           = "commitizen"

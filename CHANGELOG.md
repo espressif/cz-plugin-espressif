@@ -10,6 +10,10 @@
 
 ## Unreleased
 
+---
+
+## v0.3.0 (2024-09-10)
+
 ### ✨ New features
 
 - add pre-commit hook for autoupdate CHANGELOG *(Tomas Sebestik - 8fd458b)*

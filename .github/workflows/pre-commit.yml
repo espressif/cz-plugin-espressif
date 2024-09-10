@@ -19,4 +19,4 @@ jobs:
       - name: Run pre-commit
         uses: pre-commit/action@v3.0.1
         env:
-          SKIP: pip-compile
+          SKIP: pip-compile,update-changelog
