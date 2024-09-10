@@ -11,9 +11,39 @@ default:
 exit:
     exit 0
 
-# Activate virtual environment
-activate-venv:
-    if [ -d "venv" ]; then source venv/bin/activate; else echo "Virtual environment not found. Please create it first."; fi
+build-install:
+    pip uninstall -y czespressif
+    python -m build
+    pip install .
+    cz example
+    pip list | grep czespressif
+
+install:
+    pip uninstall -y czespressif
+    pip install -e .
+    cz example
+    pip list | grep czespressif
+
+venv39:
+    /usr/bin/python3.9 -m venv venv
+    . venv/bin/activate
+
+venv310:
+    /usr/bin/python3.10 -m venv venv
+    . venv/bin/activate
+
+venv311:
+    /usr/bin/python3.11 -m venv venv
+    . venv/bin/activate
+
+venv312:
+    /usr/bin/python3.12 -m venv venv
+    . venv/bin/activate
+
+# Remove virtual environment
+remove-venv:
+    rm -rf venv
+    rm -rf .venv
 
 # Reinstall development dependencies in virtual environment
 reinstall-venv:
@@ -21,7 +51,7 @@ reinstall-venv:
 
 # Clean temporary and cache files
 clean-temps:
-    rm -rf .mypy_cache/ .ruff_cache/ cz_plugin_espressif/cz_plugin_espressif.egg-info
+    rm -rf .pytest_cache .mypy_cache .nox .ruff_cache .tox build dist
 
 # Set up the environment: activate and reinstall
 setup-env:

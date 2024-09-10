@@ -1,0 +1,61 @@
+{#    MACROS START--- #}
+{%- macro render_commit_record(change, config) -%}
+    {%- if change.scope -%}
+        - **{{ change.scope }}**: {{ change.message }}
+        {%- if config.changelog_show_authors and config.changelog_show_commits -%}
+             {# KEEP SPACE #} *({{ change.author }} - {{ change.sha1[:7] }})*
+        {%- elif config.changelog_show_authors -%}
+            {# KEEP SPACE #} *({{ change.author }})*
+        {%- elif config.changelog_show_commits -%}
+            {# KEEP SPACE #} *({{ change.sha1[:7] }})*
+        {%- endif -%}
+    {%- else -%}
+        {%- if change.message -%}
+            - {{ change.message }}
+            {%- if config.changelog_show_authors and config.changelog_show_commits -%}
+                {# KEEP SPACE #} *({{ change.author }} - {{ change.sha1[:7] }})*
+            {%- elif config.changelog_show_authors -%}
+                {# KEEP SPACE #} *({{ change.author }})*
+            {%- elif config.changelog_show_commits -%}
+                {# KEEP SPACE #} *({{ change.sha1[:7] }})*
+            {%- endif -%}
+        {%- endif -%}
+    {%- endif -%}
+{%- endmacro -%}
+{#    MACROS END--- #}
+
+{#    TEMPLATE START--- #}
+{% for release in tree %}{# ---Release version #}
+{% if not (release.version == 'Unreleased' and not config.changelog_unreleased) %}{# ---IF-Unreleased section #}
+## {{ release.version }}{% if release.date %} ({{ release.date }}){% endif %}
+
+{# keep empty line above this comment #}
+{% for change_key, changes in release.changes.items() %}{# ---Sections #}
+
+{# keep empty line above this comment #}
+{% if change_key %}{# ---Section Title #}
+### {{ change_key }}
+{% endif %}{# Section Title--- #}
+
+{# keep empty line above this comment #}
+{% for change in changes %}{# Commit record--- #}
+{{ render_commit_record(change, config) }}
+{% endfor %}{# Commit record--- #}
+{% endfor %}{# Sections--- #}
+
+{# keep empty line above this comment #}
+{% if config.changelog_section_line %}{# ---IF-Section line #}
+---
+{% endif %}{# IF-Section line--- #}
+
+{# keep empty line above this comment #}
+{% endif %}{# IF-Unreleased section--- #}
+{% endfor %}{# Release vesion--- #}
+{#    TEMPLATE END--- #}
+{# #}
+{# Release version == e.g. "v4.7.0 (2023-12-13)" #}
+{# Sections == e.g. "New features" block, "Bug fixes" block #}
+{# Section Title == e.g. "New features" header, "Bug fixes" header #}
+{# Commit record == e.g. "- **stub**: Add ESP32-S3 octal flash support *(Roland Dobai - b746aa7) #}
+{# IF-Unreleased section == enable/disable whole block "Unreleased" #}
+{# IF-Section line == enable/disable horizontal line between sections #}

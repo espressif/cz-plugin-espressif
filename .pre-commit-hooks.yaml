@@ -1,0 +1,9 @@
+---
+- id: update-changelog
+  name: Update changelog (section Unreleased)
+  entry: 'cz changelog > /dev/null'
+  language: system
+  pass_filenames: false
+  description: Updates changelog - section Unreleased
+  additional_dependencies:
+    - czespressif

@@ -8,3 +8,5 @@
 /docs/_build/
 *.egg-info/
 __pycache__/
+_version.py
+TODO.md

@@ -11,21 +11,22 @@
         "Operating System :: MacOS :: MacOS X",
         "License :: OSI Approved :: GNU General Public License v2 or later (GPLv2+)",
         "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
         "Programming Language :: Python :: 3.12",
     ]
-    dependencies = ["commitizen>=3.21.3"]
+    dependencies = ["commitizen>=3.29.0"]
     description = "Commitizen tools plugin with Espressif code style"
     dynamic = ["version"]
     license = { file = "LICENSE" }
-    name = "cz_plugin_espressif"
+    name = "czespressif"
     readme = "README.md"
-    requires-python = ">=3.10"
+    requires-python = ">=3.9"
 
     [project.optional-dependencies]
         dev = [
-            "pre-commit~=3.3.0",
+            "twine~=5.1.1",
             "pip-tools~=7.3",
             "pytest-cov~=4.1.0",
             "pytest~=7.4.0",
@@ -34,7 +35,7 @@
         test = ["pytest-cov~=4.1.0", "pytest~=7.4.0"]
 
     [project.entry-points."commitizen.plugin"]
-        cz_plugin_espressif = "cz_plugin_espressif:CzPluginEspressif"
+        czespressif = "czespressif:CzPluginEspressif"
 
 [project.urls]
     Changelog = "https://github.com/espressif/cz-plugin-espressif/blob/master/CHANGELOG.md"
@@ -44,15 +45,16 @@
 
 [build-system]
     build-backend = "setuptools.build_meta"
-    requires      = ["setuptools-scm>=8.0", "setuptools>=60"]
-
-[tool.setuptools_scm]
-
-[tool.setuptools.package-data]
-    cz_plugin_espressif = ["*.py"]
+    requires      = ["setuptools>=64"]
 
 [tool.setuptools.packages.find]
-    where = ["cz_plugin_espressif"]
+    where = ["."]
+
+[tool.setuptools.package-data]
+    czespressif = ["*.py", "templates/*"]
+
+[tool.setuptools.dynamic]
+    version = { attr = "czespressif.__init__.__version__" }
 
 [tool.codespell]
     skip = 'tests/*'
@@ -77,17 +79,18 @@
             "too-many-branches",
             "too-many-locals",
             "too-many-return-statements",
+            "too-many-instance-attributes",
             "too-many-statements",
             "ungrouped-imports",
         ]
     [tool.pylint.'FORMAT']
-        max-line-length = 120
+        max-line-length = 160
 
 [tool.ruff]
     exclude        = ["tests/.*"]
-    line-length    = 120
+    line-length    = 160
     lint.select    = ["B", "E", "F", "I", "S", "W"]
-    target-version = "py310"
+    target-version = "py39"
 
     [tool.ruff.format]
         quote-style = "single"
@@ -97,13 +100,9 @@
         lines-between-types = 1
 
 [tool.mypy]
-    disallow_incomplete_defs = false
-    disallow_untyped_defs    = true
-    exclude                  = '^venv/'
-    ignore_missing_imports   = true
-    python_version           = "3.10"
-    warn_no_return           = true
-    warn_return_any          = true
+    ignore_missing_imports = true
+    python_version         = "3.9"
+    strict                 = false
 
 [tool.pytest.ini_options]
     addopts          = "-s --log-cli-level DEBUG --cov=sample_python_app --cov-report=term"
@@ -122,3 +121,14 @@
     section_whitelines               = 1
     sequence_style                   = "keep_style"
     whitelines                       = 1
+
+[tool.commitizen]
+    annotated_tag              = true
+    bump_message               = 'change(bump): release $current_version → $new_version [skip-ci]'
+    changelog_merge_prerelease = true
+    name                       = "czespressif"
+    tag_format                 = "v$version"
+    update_changelog_on_bump   = true
+    version                    = "1.0.0"
+    version_files              = ["czespressif/__init__.py:__version__"]
+    version_provider           = "commitizen"

@@ -57,7 +57,7 @@ repos:
         additional_dependencies:
           - mdformat-gfm # Support for GitHub Flavored Markdown (GFM), including tables, task lists, strikethroughs, and autolinks.
           - mdformat-ruff # Formats Python code blocks in Markdown files according to the `ruff` linter's style.
-          - mdformat-simple-breaks # Ensures that single line breaks in Markdown are converted to `<br>` t
+          - mdformat-simple-breaks # Ensures that single line breaks in Markdown are converted to `<br>`
 
   - repo: https://github.com/Yelp/detect-secrets
     rev: v1.5.0
@@ -81,3 +81,11 @@ repos:
         language: system
         pass_filenames: false
         files: requirements.txt|pyproject.toml
+
+  - repo: local
+    hooks:
+      - id: update-changelog # Update changelog, section Unreleased
+        name: update changelog
+        entry: bash -c 'cz changelog > /dev/null'
+        language: system
+        pass_filenames: false
