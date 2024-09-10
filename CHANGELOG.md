@@ -8,53 +8,11 @@
 
 ---
 
-## Unreleased
-
-### 🚨 Breaking changes
-
-- This will trigger a major version bump *(Tomas Sebestik - 8b702d6)*
-
-### 📖 Documentation
-
-- **readme**: update GitHub badges, add pypi and compatible python *(Tomas Sebestik - 8b702d6)*
-
----
-
-## v0.3.1 (2024-09-10)
-
----
-
-## v0.3.0 (2024-09-10)
+## v1.0.0 (2024-09-10)
 
 ### ✨ New features
 
-- add pre-commit hook for autoupdate CHANGELOG *(Tomas Sebestik - 8fd458b)*
-
-### 🐛 Bug fixes
-
-- **changelog**: fix custom header,title,footer, update defaults *(Tomas Sebestik - ed9b8f3)*
-- **template**: fixed Changelog template - displaying w/wo authors, commits *(Tomas Sebestik - f151532)*
-
-### 📖 Documentation
-
-- **readme**: update examples with comments *(Tomas Sebestik - 65464ef)*
-
----
-
-## v0.2.6 (2024-09-09)
-
-### ✨ New features
-
-- **plugin**: add plugin, commit message questions and changelog template *(Tomas Sebestik - dac86eb)*
-
-### 🐛 Bug fixes
-
-- **changelog**: do not add changelog headers when "cz bump" *(Tomas Sebestik - 65631a9)*
-- **changelog**: update changelog builder to be compatible with mdformat linter *(Tomas Sebestik - e6ba7d8)*
-
-### 📖 Documentation
-
-- **readme**: add basic usage and configuration *(Tomas Sebestik - e713491)*
+- **plugin**: add plugin, commit message questions, changelog template (#1) *(Tomas Sebestik - f2fa815)*
 
 ---
 
