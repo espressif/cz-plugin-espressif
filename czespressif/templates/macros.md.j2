@@ -1,0 +1,29 @@
+{%- macro render_commit_record_scope(change, config) -%}
+    - **{{ change.scope }}**: {{ change.message }}
+    {%- if config.changelog_show_authors and config.changelog_show_commits -%}
+            {# KEEP SPACE #} *({{ change.author }} - {{ change.sha1[:7] }})*
+    {%- elif config.changelog_show_authors -%}
+        {# KEEP SPACE #} *({{ change.author }})*
+    {%- elif config.changelog_show_commits -%}
+        {# KEEP SPACE #} *({{ change.sha1[:7] }})*
+    {%- endif -%}
+{%- endmacro -%}
+
+{%- macro render_commit_record_no_scope(change, config) -%}
+    - {{ change.message }}
+    {%- if config.changelog_show_authors and config.changelog_show_commits -%}
+        {# KEEP SPACE #} *({{ change.author }} - {{ change.sha1[:7] }})*
+    {%- elif config.changelog_show_authors -%}
+        {# KEEP SPACE #} *({{ change.author }})*
+    {%- elif config.changelog_show_commits -%}
+        {# KEEP SPACE #} *({{ change.sha1[:7] }})*
+    {%- endif -%}
+{%- endmacro -%}
+
+{%- macro render_commit_record_simple(change) -%}
+    {%- if change.scope -%}
+        - **{{ change.scope }}**: {{ change.message }}
+    {%- elif change.message -%}
+        - {{ change.message }}
+    {%- endif -%}
+{%- endmacro -%}

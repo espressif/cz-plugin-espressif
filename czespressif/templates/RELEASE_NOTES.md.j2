@@ -1,0 +1,33 @@
+{# This changelog template is used for automatically generated GH release notes. #}
+{# It is passed to commitizen's --template option in a GH Actions workflow run. #}
+
+{% import 'macros.md.j2' as macros %}
+
+{# ---TEMPLATE #}
+{% for release in tree %}{# ---Release version #}
+
+{# keep empty line above this comment #}
+{% for change_key, changes in release.changes.items() %}{# ---Sections #}
+
+{# keep empty line above this comment #}
+{% if change_key %}{# ---Section Title #}
+### {{ change_key }}
+{% endif %}{# Section Title--- #}
+
+{% for change in changes %}{# ---Commit record with scope #}
+{% if change.scope %}
+{{ macros.render_commit_record_scope(change, config) }}
+{% endif %}
+{% endfor %}{# Commit record with scope--- #}
+{% for change in changes%}{# ---Commit record no scope#}
+{% if not change.scope %}
+{{ macros.render_commit_record_no_scope(change, config) }}
+{% endif %}
+{% endfor %}{# Commit record no scope--- #}
+{% endfor %}{# Sections--- #}
+{% endfor %}{# Release version--- #}
+
+{# ---RELEASE NOTES OPTIONAL FOOTER #}
+{{ config.release_notes_footer }}
+{# RELEASE NOTES OPTIONAL FOOTER--- #}
+{#    TEMPLATE--- #}

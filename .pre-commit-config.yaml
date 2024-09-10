@@ -18,7 +18,7 @@ repos:
       - id: check-shebang-scripts-are-executable # Checks that scripts with shebangs are executable.
       - id: check-case-conflict # Check conflict on a case-insensitive filesystem (MacOS HFS+/Windows FAT).
       - id: mixed-line-ending # Detects mixed line endings (CRLF/LF)
-        args: ["-f=lf"] # Forces files to use LF line endings
+        args: ['-f=lf'] # Forces files to use LF line endings
 
   - repo: https://github.com/pylint-dev/pylint
     rev: v3.2.6
@@ -46,7 +46,7 @@ repos:
     rev: v2.3.0
     hooks:
       - id: codespell # Code spell checker
-        args: ["--write-changes"]
+        args: ['--write-changes']
         additional_dependencies: [tomli]
 
   - repo: https://github.com/executablebooks/mdformat
@@ -72,6 +72,11 @@ repos:
     hooks:
       - id: yamlfix
 
+  - repo: https://github.com/espressif/cz-plugin-espressif
+    rev: v1.0.1
+    hooks:
+      - id: update-changelog
+
   # Local hooks
   - repo: local
     hooks:
@@ -81,11 +86,3 @@ repos:
         language: system
         pass_filenames: false
         files: requirements.txt|pyproject.toml
-
-  - repo: local
-    hooks:
-      - id: update-changelog # Update changelog, section Unreleased
-        name: update changelog
-        entry: bash -c 'cz changelog > /dev/null'
-        language: system
-        pass_filenames: false
