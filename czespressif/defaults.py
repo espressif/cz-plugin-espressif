@@ -93,13 +93,15 @@ TYPES: List[Dict] = [  # this is order in changelog
 CHANGELOG_TITLE: str = 'CHANGELOG'
 
 CHANGELOG_HEADER: str = """
-> All notable changes to this project are documented in this file. The list is not exhaustive,
-> typically, only important changes, fixes, and new features in the code are reflected here.
+> All notable changes to this project are documented in this file.
+> This list is not exhaustive - only important changes, fixes, and new features in the code are reflected here.
 
 <sub>The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), \
     [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and \
     [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
-</sub>---"""
+</sub>
+
+---"""
 
 
 CHANGELOG_FOOTER: str = f"""**[Espressif Systems CO LTD. ({datetime.now().year})](https://www.espressif.com/)**\n
