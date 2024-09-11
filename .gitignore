@@ -10,3 +10,9 @@
 __pycache__/
 _version.py
 TODO.md
+
+# Local test to create Release notes
+Release_notes.md
+
+# Local test to create full CHANGELOG
+CHANGELOG-output.md

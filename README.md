@@ -1,62 +1,122 @@
 <a href="https://www.espressif.com">
-    <img src="czespressif/templates/espressif-logo.svg" align="right" height="20" />
+    <img src="https://www.espressif.com/sites/all/themes/espressif/logo-black.svg" alt="Espressif logo" title="Espressif" align="right" height="20" />
 </a>
 
-[![Release][release-badge]][release-url] [![Pre-commit][pre-commit-badge]][pre-commit-url] [![Conventional Commits][conventional-badge]][conventional-url] [![PYPI version][pypiversion-badge]][pypiversion-url] [![Python compatible][pypipythons-badge]][pypipythons-url]
+# Commitizen plugin Espressif
 
+This is a plugin for Commitizen that makes it easy to create and maintain a well-organized and good-looking `CHANGELOG.md`. It also takes care of version bumping and helps you write commit messages that follow Espressif standards.
+
+All of this with minimal config and setup, so your `pyproject.toml` file stays clean and simple.
+
+<!-- GitHub Badges -->
+
+<div align="center">
+  <p>
+    <hr>
+    <img alt="GitHub Release" src="https://img.shields.io/github/v/release/espressif/cz-plugin-espressif? display_name=release&logo=github&logoColor=white&label=Release">
+    <img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/czespressif?logo=pypi&logoColor=white&label=Pythons&link=https%3A%2F%2Fpypi.org%2Fproject%2Fczespressif%2F">
+    <img alt="Static Badge" src="https://img.shields.io/badge/pip%20install-czespressif-black?logo=python&logoColor=white">
+    <br>
+    <img alt="GitHub contributors" src="https://img.shields.io/github/contributors/espressif/cz-plugin-espressif?logo=github&label=Contributors&color=purple">
+    <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/y/espressif/cz-plugin-espressif?logo=git&logoColor=white&label=Commits&color=purple">
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/espressif/cz-plugin-espressif?logo=git&logoColor=white&label=Last%20commit">
+    <img alt="PyPI - Downloads" src="https://img.shields.io/pypi/dm/czespressif?logo=pypi&logoColor=white&label=PyPI%20downloads&color=blue&cacheSeconds=3600&link=https%3A%2F%2Fpypi.org%2Fproject%2Fczespressif%2F">
+    <a href="/LICENSE"><img alt="Project License" src="https://img.shields.io/pypi/l/czespressif"/></a>
+    <br>
+    <img alt="GitHub workflow SyncJira" src="https://img.shields.io/github/actions/workflow/status/espressif/cz-plugin-espressif/.github%2Fworkflows%2Fsync-jira.yml?branch=master&logo=jirasoftware&label=Sync with Jira">
+    <img alt="itHub workflow CodeQL" src="https://img.shields.io/github/actions/workflow/status/espressif/cz-plugin-espressif/.github%2Fworkflows%2Fcode-ql.yml?branch=master&label=CodeQL">
+  </p>
+  <small>
+    <b>
+      <a href="https://github.com/espressif/cz-plugin-espressif/issues/new?assignees=&labels=Type%3A+Bug&projects=&template=01-BUG-REPORT.yml">Report bug</a>
+      ·
+      <a href="https://github.com/espressif/cz-plugin-espressif/issues/new?assignees=&labels=Type%3A+Feature\+Request&projects=&template=02-FEATURE-REQUEST.yml">Request Feature</a>
+    </b>
+  </small>
+  <hr>
 </div>
-<hr>
 
-- [Introduction](#introduction)
-- [Install](#install)
-  - [Build Changelog](#build-changelog)
-  - [Bump Release version](#bump-release-version)
-  - [Write commit message](#write-commit-message)
-  - [Example](#example)
-- [Configuration](#configuration)
-  - [Minimal setup](#minimal-setup)
-  - [Optimal setup](#optimal-setup)
-  - [Additional configurable parameters](#additional-configurable-parameters)
-- [Pre-commit hook](#pre-commit-hook)
-- [Contributing](#contributing)
-- [License](#license)
+- [Commitizen plugin Espressif](#commitizen-plugin-espressif)
+  - [Features](#features)
+  - [Compatibility](#compatibility)
+  - [Install](#install)
+  - [Usage](#usage)
+    - [Create Changelog file](#create-changelog-file)
+    - [Bump Release version](#bump-release-version)
+    - [GitHub Action for Automated Release Creation](#github-action-for-automated-release-creation)
+    - [Create commit messages](#create-commit-messages)
+    - [Examples of good commit messages](#examples-of-good-commit-messages)
+  - [Configuration](#configuration)
+    - [Minimal setup](#minimal-setup)
+    - [Optimal setup](#optimal-setup)
+    - [Additional configurable parameters](#additional-configurable-parameters)
+  - [Solving Troubles](#solving-troubles)
+  - [Pre-commit hook](#pre-commit-hook)
+  - [Contributing](#contributing)
+  - [License](#license)
+  - [Credits](#credits)
 
 ---
 
-## Introduction
+## Features
 
-This is a plugin for Commitizen that makes it easy to create and maintain a well-organized and good-looking `CHANGELOG.md`.
+- Can be almost zero-config but offers many customization options if your project needs it.
+- Predefined **CHANGELOG template** with default categories _Breaking changes / New features / Bug fixes / Documentation / Code refactoring / Removals_.
+- The CHANGELOG automatically displays commits and the authors of those commits.
+- The default order in the changelog categories lists commits with a scope first, followed by the rest, both groups sorted alphabetically.
+- Predefined **Release Notes template** that can be used in an automated release workflow.
+- `cz commit` command with default Espressif commit types, aligned with the Espressif pre-commit linter.
+- You can use pre-commit hook that triggers a local changelog update (Unreleased section) when version files change.
 
-It also takes care of version bumping and helps you write commit messages that follow Espressif standards.
+---
 
-All of this with minimal config and setup, so your `pyproject.toml` file stays clean and simple.
+## Compatibility
+
+[This plugin](https://pypi.org/project/czespressif/) requires Python 3.9 or higher. It should run on pretty much any anything (Linux, Mac, Windows, amd64, aarch64).
+
+If you encounter issues with a specific architecture or OS, please [report it here](https://github.com/espressif/cz-plugin-espressif/issues/new?assignees=&labels=Type%3A+Bug&projects=&template=01-BUG-REPORT.yml), and we will try to address it as soon as possible.
 
 ---
 
 ## Install
 
-Of course, you have already created and activated a Python virtual environment... then:
+Install with `pip` or your favorite package manager:
 
 ```sh
 pip install czespressif
 ```
 
-.... and add snippet from [Minimal setup](#minimal-setup) - that's it 🤝.
+Then add this snippet to \`pyproject.toml:
 
-You can also add it to your project `dev` dependencies (suggested) and run the sync command (`pipenv sync`, `pip-sync`, `poetry install`, ...).
+```ini
+[tool.commitizen]
+   name            = "czespressif"
+   bump_message    = 'change(bump): release $current_version → $new_version [skip-ci]'
+```
 
-Commitizen itself is in the plugin's dependencies, so pip will take care of everything.
+And verify that installation and setup was successful by showing the example.
+
+```sh
+cz example
+```
+
+> \[!TIP\]
+> You can also add it to your project `dev` dependencies (suggested) and run the sync command (`pipenv sync`, `pip-sync`, `poetry install`, ...).
+>
+> commitizen itself is in the plugin's dependencies, so pip will take care of everything.
 
 > \[!WARNING\]
-> Don't try to install it system-wide with `pipx`.
->
-> This is a plugin, and that's probably not going to work as you expect.
+> Don't try to install it system-wide with `pipx`, it probably not going to work as you expect.
 
-### Build Changelog
+---
+
+## Usage
+
+### Create Changelog file
 
 If a changelog already exists in your project, make sure you have staged or committed its latest version.
 
-This command turns your old changelog into a nicely organized template based on the Keep Changelog standard.
+This command turns your old changelog into a nicely organized template based on the [Keep a Changelog standard](https://keepachangelog.com/en/1.1.0/).
 
 ```sh
 cz changelog
@@ -72,15 +132,40 @@ cz bump --dry-run
 
 This only shows the future version and the part of the changelog that will be updated. When all ok, do the same without `--dry-run` flag.
 
-### Write commit message
+### GitHub Action for Automated Release Creation
 
-In case anyone actually prefers this way of creating commit messages, the command:
+In automated scenarios, such as GitHub Actions workflows, you may want to create project releases automatically. This can be easily achieved by parsing the changelog to extract the "Release notes" relevant to the current release.
+
+In this repository, there is a GitHub workflow (`.github/workflows/create-release.yml`) that follows this strategy. To trigger a release, the repository admin simply needs to push a release tag to the origin (GitHub).
+This triggers the workflow, which builds all Python binaries for all combinations of Python versions, operating systems, and architectures. It then parses the changelog to extract the release notes (only the section related to the current release, without any headers, footers, etc.), creates a GitHub release, and uploads the binaries both to the GitHub release and the PyPI registry.
+
+The following command generates the changelog for the release version v4.8.0, using the internal template for release notes and writing the partial changelog to a file:
+
+```sh
+cz changelog v4.8.0 --template="RELEASE_NOTES.md.j2" --file-name="Release_notes.md"
+
+```
+
+**Release notes custom footer**: You can append a custom footer to the end of the release notes snippet. For example, if you want to include a link to something important for your project, or maybe some GitHub badges, and so on, you can do that.
+
+You can check [example without a footer (default)](docs/Release_notes_example.md) and [example with a custom footer](docs/Release_notes_example_with_footer.md).
+
+> \[!IMPORTANT\]
+> Note that the custom template for release notes is part of the czespressif plugin, not the target (your project) repository.
+> Any custom settings you define for the changelog locally in the project configuration will also apply to the release notes. For example, if you change the order of sections in the changelog, the release notes will reflect that change as well.
+>
+> This approach ensures consistent visual styling and allows repository admins to configure everything in one place.
+
+> \[!TIP\]
+> You can check the implementation of this command in the GitHub workflow [.github/workflows/create-release.yml](.github/workflows/create-release.yml) if you're interested.
+
+### Create commit messages
+
+In case anyone actually prefers this way of creating commit messages, the command in this plugin is aligned with the Espressif commit linter and DangerJS linters.:
 
 ```sh
 cz commit
 ```
-
-in this plugin is aligned with the Espressif commit linter and DangerJS linters. You can give it a try...
 
 ```
 ? Select the type of change you are committing (Use arrow keys)
@@ -95,13 +180,12 @@ in this plugin is aligned with the Espressif commit linter and DangerJS linters.
    remove                   🗑️ Removing code or files
 ```
 
-### Example
+### Examples of good commit messages
 
-If you are unsure about the commit message standard, hit:
+If you are unsure about the commit message standard, run:
 
 ```sh
 cz example
-
 ```
 
 This will bring up a complete example of good commit messages and commit schema in the terminal.
@@ -136,6 +220,9 @@ Config is accepted in `pyproject.toml` (priority, following example), `.cz.toml`
   changelog_merge_prerelease = true
   tag_format = "v$version"
   update_changelog_on_bump = true
+  version                    = "1.2.3"
+  version_files              = ["<src>/__init__.py:__version__"]
+  version_provider           = "commitizen"
 
 ```
 
@@ -211,6 +298,11 @@ Config is accepted in `pyproject.toml` (priority, following example), `.cz.toml`
     # Note: The order in this list doesn't matter — if you want to change the sections' order too, use with "change_type_order."
     types_in_changelog = ["feat", "fix", "refactor", "style", "ci"]
 
+
+    # - Custom text that you can append to release notes output -
+    # Default: Null (in default there is no custom footer )
+    release_notes_footer = """Thanks to <FILL OUT CONTRIBUTORS>, and others for contributing to this release!"""
+
     # - Add extra commit types for 'cz commit' and to the changelog (sections) -
     # Note: If you are working with custom commit types, ensure your commit linter and PR/MR linter is set same way
     [[tool.commitizen.extra_types]]
@@ -224,15 +316,54 @@ Config is accepted in `pyproject.toml` (priority, following example), `.cz.toml`
 
 ---
 
+## Solving Troubles
+
+The plugin `czespressif` has `commitizen` as its dependency, so users only need to install `czespressif`, and that will automatically install the proper version of `commitizen`. This plugin requires at least version 3.29 of `commitizen` to work properly. Older versions either cause errors like this:
+
+```log
+The committer has not been found in the system.
+
+Try running 'pip install czespressif'
+```
+
+... or `czespressif` plugin partially works but behaves in weird and unexpected ways.
+
+If you encounter this error, it probably means that you have a conflicting version of commitizen installed on your system, and this old version is prioritized in your system path.
+
+You can copy and paste this snippet into your terminal to check if this is the case:
+
+```sh
+clear;if command -v cz &> /dev/null; then
+    cz_version=$(cz version | awk '{print $NF}')
+    if [ "$(printf '%s\n' "3.29" "$cz_version" | sort -V | head -n1)" = "3.29" ]; then
+        echo "Commitizen version $cz_version is OK."
+    else
+        echo "Commitizen version $cz_version is too old. Found at $(which cz)."
+        echo "Please uninstall it with 'pip uninstall commitizen' or 'pipx uninstall commitizen'."
+    fi
+else
+    echo "No Commitizen found, but you are not in a virtual environment."
+    echo "Consider creating/activating a virtual environment first and installing by 'pip install czespressif'."
+fi
+```
+
+> \[!TIP\]
+> For each Python project, use a virtual environment. If you install everything with pip to the system Python, you risk running into unsolvable dependency issues and possibly breaking some system tools.
+>
+> If your project isn’t a Python project and you don’t care about python virtual envs, at least ensure you don’t have multiple outdated versions of some Python packages, such as commitizen in this case.
+
+---
+
 ## Pre-commit hook
 
 To automatically keep your changelog's "Unreleased" section up to date, add the following to your `.pre-commit-config.yaml` file:
 
 ```yaml
 - repo: https://github.com/espressif/cz-plugin-espressif
-  rev: ""
+  rev: ''
   hooks:
     - id: update-changelog
+      files: ^pyproject\.toml$ # Runs only if file with version changes
 ```
 
 Next, run the following command to fetch the latest version (`rev:`):
@@ -241,25 +372,26 @@ Next, run the following command to fetch the latest version (`rev:`):
 pre-commit autoupdate --repo https://github.com/espressif/cz-plugin-espressif
 ```
 
+---
+
 ## Contributing
 
 We welcome contributions from the community! Please read the [Contributing Guide](CONTRIBUTING.md) to learn how to get involved.
 
+---
+
 ## License
 
-This repository is licensed under the [Apache 2.0 License](LICENSE).
+This PROJECT is licensed under the [Apache 2.0 License](LICENSE).
 
 ---
 
-<!-- GitHub Badges -->
+## Credits
 
-[conventional-badge]: https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg?style=flat-square
-[conventional-url]: https://conventionalcommits.org
-[pre-commit-badge]: https://img.shields.io/badge/pre--commit-enabled-brightgreen?style=flat-square&logo=pre-commit&logoColor=white
-[pre-commit-url]: https://github.com/pre-commit/pre-commit
-[pypipythons-badge]: https://img.shields.io/badge/dynamic/yaml?url=https://raw.githubusercontent.com/espressif/cz-plugin-espressif/master/.github/workflows/pypa-publish-pypi.yml&query=$.jobs%5B'pypi-build-publish'%5D.strategy.matrix%5B'python-version'%5D&label=Python&logo=python&color=3366ff&logoColor=ffcc00&labelColor=383838
-[pypipythons-url]: https://pypi.org/project/czespressif/#files
-[pypiversion-badge]: https://img.shields.io/pypi/v/czespressif?labelColor=383838
-[pypiversion-url]: https://pypi.org/project/czespressif/
-[release-badge]: https://img.shields.io/github/v/release/espressif/cz-plugin-espressif
-[release-url]: https://github.com/espressif/cz-plugin-espressif/releases
+This was inspired by the project [Emotional](https://github.com/noirbizarre/emotional), created by [Axel H. / @noirbizarre](https://github.com/noirbizarre).
+
+- If you are looking for **similar and customizable plugin for projects outside Espressif** organization, you should definitely try [Emotional](https://github.com/noirbizarre/emotional).
+
+- If you are learning Python and want to write clean and well-organized, pro-level code, you should definitely check out [Emotional](https://github.com/noirbizarre/emotional).
+
+---

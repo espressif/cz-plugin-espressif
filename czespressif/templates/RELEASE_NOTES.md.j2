@@ -27,7 +27,7 @@
 {% endfor %}{# Sections--- #}
 {% endfor %}{# Release version--- #}
 
-{# ---RELEASE NOTES OPTIONAL FOOTER #}
+{% if config.release_notes_footer %}{# ---RELEASE NOTES OPTIONAL FOOTER #}
 {{ config.release_notes_footer }}
-{# RELEASE NOTES OPTIONAL FOOTER--- #}
+{% endif %}{# RELEASE NOTES OPTIONAL FOOTER--- #}
 {#    TEMPLATE--- #}
