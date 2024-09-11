@@ -1,0 +1,109 @@
+---
+# This workflow automates the creation of GitHub and PyPI releases.
+# It builds Python packages for multiple OS and architecture combinations,
+#  generates release notes by using commitizen Espressif plugin,
+#  uploads artifacts to GitHub Releases, and publishes the release to PyPI.
+
+name: 📦 Create Release GitHub and PyPI
+
+on:
+  workflow_dispatch:
+  push: {tags: ['*v[0-9]*']}
+
+jobs:
+  build-release-assets:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    strategy:
+      fail-fast: true # Stop if any of the matrix builds fail
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-14, macos-12]
+        arch: [amd64, arm64]
+        python-version: ['3.9', '3.10', '3.11', '3.12']
+        exclude:
+          - {os: windows-latest, arch: arm64}   # Windows doesn't support arm64 in this context
+          - {os: macos-12, arch: arm64}   # macos-12 runner is Intel Silicon
+          - {os: macos-14, arch: amd64}   # macos-14 runner is Apple M1 Silicon
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install dependencies
+        run: |-
+          python -m pip install --upgrade pip
+          pip install build
+
+      - name: Build python wheels + package source code
+        run: python -m build
+
+      - name: Upload builds
+        uses: actions/upload-artifact@v3
+        with:
+          name: python-package-${{ matrix.python-version }}
+          path: dist/*
+
+  create-release:
+    needs: build-release-assets
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.9' # Minimum supported version - only for running `cz changelog ...`
+          cache: pip
+
+      - name: Install dependencies
+        run: |-
+          python -m pip install --upgrade pip
+          python -m pip install .
+
+      - name: Get release version from "czespressif/__init__.py"
+        run: |-
+          version=$(grep '__version__' czespressif/__init__.py | sed -E "s/__version__ = '([^ ]*)'.*/\1/")
+          echo "VERSION=$version" >> $GITHUB_ENV
+
+      - name: Generate Release notes from Changelog
+        run: cz changelog ${{ env.VERSION }} --template="RELEASE_NOTES.md.j2" --file-name="RELEASE_NOTES.md"
+
+      - name: Show Release notes
+        run: cat RELEASE_NOTES.md
+
+      - name: Download artifacts (builds)
+        uses: actions/download-artifact@v4
+        with:
+          pattern: python-package-*
+          merge-multiple: true
+
+      - name: Create GitHub release (and upload assets)
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          body_path: RELEASE_NOTES.md
+          name: Version ${{ env.VERSION }}
+          draft: false
+          prerelease: false
+          files: |
+            dist/*.whl
+            dist/*.tar.gz
+
+      - name: Create PyPI release and (upload assets to PyPI)
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: ${{ secrets.PYPI_PROJECT_TOKEN }}
+          skip-existing: true
+          verify-metadata: true
