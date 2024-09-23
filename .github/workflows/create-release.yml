@@ -76,7 +76,7 @@ jobs:
           echo "VERSION=$version" >> $GITHUB_ENV
 
       - name: Generate Release notes from Changelog
-        run: cz changelog ${{ env.VERSION }} --template="RELEASE_NOTES.md.j2" --file-name="RELEASE_NOTES.md"
+        run: cz changelog v${{ env.VERSION }} --template="RELEASE_NOTES.md.j2" --file-name="RELEASE_NOTES.md"
 
       - name: Show Release notes
         run: cat RELEASE_NOTES.md
@@ -94,7 +94,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           body_path: RELEASE_NOTES.md
-          name: Version ${{ env.VERSION }}
+          name: Version v${{ env.VERSION }}
           draft: false
           prerelease: false
           files: |

@@ -76,6 +76,7 @@ repos:
     rev: v1.0.1
     hooks:
       - id: update-changelog
+        files: ^pyproject\.toml$
 
   # Local hooks
   - repo: local
