@@ -10,12 +10,13 @@ updates:
       day: "sunday"
     commit-message:
       prefix: "ci(dependabot-pip): "
-    assignees: ["tomassebestik"]
+    reviewers: ["espressif/ci"]
 
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "weekly"
       day: "sunday"
+    commit-message:
       prefix: "ci(dependabot-actions): "
-    assignees: ["tomassebestik"]
+    reviewers: ["espressif/ci"]
