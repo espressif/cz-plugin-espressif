@@ -2,21 +2,30 @@
 version: 2
 
 updates:
-  - package-ecosystem: "pip"
+  - package-ecosystem: 'pip'
     versioning-strategy: increase-if-necessary
-    directory: "/"
-    schedule:
-      interval: "weekly"
-      day: "sunday"
-    commit-message:
-      prefix: "ci(dependabot-pip): "
-    reviewers: ["espressif/ci"]
 
-  - package-ecosystem: "github-actions"
-    directory: "/"
+    directory: '/'
     schedule:
-      interval: "weekly"
-      day: "sunday"
+      interval: 'weekly'
+      day: 'sunday'
     commit-message:
-      prefix: "ci(dependabot-actions): "
-    reviewers: ["espressif/ci"]
+      prefix: 'ci(deps-pip): [skip-ci]'
+      prefix-development: 'ci(deps-dev-pip): [skip-ci]'
+    reviewers: ['espressif/ci']
+    open-pull-requests-limit: 5
+    pull-request-branch-name:
+      separator: '-'
+
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+      day: 'sunday'
+    commit-message:
+      prefix: 'ci(deps-actions): [skip-ci]'
+      prefix-development: 'ci(deps-dev-actions): [skip-ci]'
+    reviewers: ['espressif/ci']
+    open-pull-requests-limit: 5
+    pull-request-branch-name:
+      separator: '-'
