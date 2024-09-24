@@ -22,7 +22,7 @@ markupsafe==2.1.5
     # via jinja2
 packaging==24.1
     # via commitizen
-prompt-toolkit==3.0.36
+prompt-toolkit==3.0.47
     # via questionary
 pyyaml==6.0.2
     # via commitizen
