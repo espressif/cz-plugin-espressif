@@ -1,13 +1,8 @@
 ---
-name: 'CodeQL'
+name: 🛡️ CodeQL
 
 on:
-  push:
-    branches: ['master', '*.X']
-  pull_request:
-    branches: ['master', '*.X']
-  schedule:
-    - cron: '0 6 * * 1'
+  schedule: [cron: '0 6 * * 1'] # Every Monday 6:00 AM UTC
 
 jobs:
   analyze:
@@ -20,6 +15,9 @@ jobs:
       fail-fast: false
       matrix:
         language: ['python']
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
 
     steps:
       - name: Checkout repository
