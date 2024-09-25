@@ -72,4 +72,20 @@ clean-temps:
         Release_notes.md \
         build \
         **/__pycache__/ \
+        demo \
         :
+
+docker-build:
+    cd docker && docker build -t tomasad/czespressif-demo . && cd -
+
+docker-build-mutliplatform:
+    cd docker && docker build -t tomasad/czespressif-demo . && cd -
+
+docker-run:
+    docker run --rm -v $(pwd):/app -u $(id -u):$(id -g) tomasad/czespressif-demo
+
+docker-push:
+    docker push tomasad/czespressif-demo
+
+docker:
+    just docker-build && just docker-run

@@ -9,6 +9,7 @@
 *.egg-info/
 __pycache__/
 _version.py
+demo/
 TODO.md
 
 # Local test to create Release notes
