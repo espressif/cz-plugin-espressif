@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 import sys
 
 from dataclasses import dataclass
@@ -99,8 +100,23 @@ class CzEspressifConfig:
         return self.types + self.extra_types
 
     @property
-    def incremental(self) -> bool:
-        return '--incremental' in sys.argv
+    def include_headers(self) -> bool:
+        # Check if the CLI arguments contain a version or range ('v1.2.3' or '1.2.3..4.5.6')
+        version_or_range = any(re.match(r'^\d+\.\d+\.\d+(\.\.\d+\.\d+\.\d+)?$', arg) for arg in sys.argv) or any(arg.startswith('v') for arg in sys.argv)
+        if version_or_range:
+            return False
+
+        # Check if the CLI arguments contain the incremental flag ('--incremental')
+        incremental_flag = '--incremental' in sys.argv
+        if incremental_flag:
+            return False
+
+        # Check if the CLI arguments contain the bump command ('bump')
+        bump = 'bump' in sys.argv
+        if bump:
+            return False
+
+        return True
 
     @property
     def changelog_unreleased(self) -> bool:
