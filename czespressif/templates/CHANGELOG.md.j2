@@ -8,8 +8,11 @@
 {% import 'macros.md.j2' as macros %}
 
 {# ---TEMPLATE START #}
+{# Render the changelog title and header only for full changelog, not for cz bump #}
+{% if config.include_headers %}
 {{ config.changelog_title }}{# ---CHANGELOG TITLE--- #}
 {{ config.changelog_header }}{# ---CHANGELOG HEADER--- #}
+{% endif %}
 
 {# keep empty line above this comment #}
 {% for release in tree %}{# ---Release version #}
@@ -38,16 +41,19 @@
 {% endfor %}{# Sections--- #}
 
 {# keep empty line above this comment #}
-{% if not loop.last and config.changelog_section_line %}{# ---IF-Section line, only if not the last release #}
+{% if config.changelog_section_line %}{# ---IF-Section line, only if not the last release #}
 ---
 
 {% endif %}{# IF-Section line--- #}
 {# keep empty line above this comment #}
 {% endif %}{# IF-Unreleased section--- #}
 {% endfor %}{# Release version--- #}
+{# Render the footer only for full changelog, not for cz bump #}
 {% if config.changelog_footer and config.changelog_footer|length > 0 %}{# ---CHANGELOG FOOTER #}
 ---{# Add horizontal line before the footer, only if the footer is not empty #}
-{% endif %}
 
+{% if config.include_headers %}
 {{ config.changelog_footer }}{# CHANGELOG FOOTER--- #}
+{% endif %}
+{% endif %}
 {#    TEMPLATE END--- #}
