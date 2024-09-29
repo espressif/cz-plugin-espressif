@@ -9,7 +9,7 @@
 
 {# ---TEMPLATE START #}
 {# Render the changelog title and header only for full changelog, not for cz bump #}
-{% if config.include_headers %}
+{% if not config.incremental %}
 {{ config.changelog_title }}{# ---CHANGELOG TITLE--- #}
 {{ config.changelog_header }}{# ---CHANGELOG HEADER--- #}
 {% endif %}
@@ -49,11 +49,9 @@
 {% endif %}{# IF-Unreleased section--- #}
 {% endfor %}{# Release version--- #}
 {# Render the footer only for full changelog, not for cz bump #}
-{% if config.changelog_footer and config.changelog_footer|length > 0 %}{# ---CHANGELOG FOOTER #}
----{# Add horizontal line before the footer, only if the footer is not empty #}
+{% if not config.incremental %}{# ---CHANGELOG FOOTER #}
+---{# Add horizontal line before the footer #}
 
-{% if config.include_headers %}
-{{ config.changelog_footer }}{# CHANGELOG FOOTER--- #}
-{% endif %}
-{% endif %}
+{{ config.changelog_footer }}
+{% endif %}{# CHANGELOG FOOTER--- #}
 {#    TEMPLATE END--- #}

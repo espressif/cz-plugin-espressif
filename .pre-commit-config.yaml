@@ -3,6 +3,8 @@ minimum_pre_commit_version: 3.3.0
 default_install_hook_types: [pre-commit, commit-msg]
 default_stages: [commit]
 
+exclude: '^tests/__snapshots__/'
+
 repos:
   - repo: meta
     hooks:
@@ -30,6 +32,8 @@ repos:
     rev: v1.11.2
     hooks:
       - id: mypy
+        args: ['--config-file', 'pyproject.toml']
+        exclude: 'tests/'
 
   - repo: https://github.com/asottile/pyupgrade
     rev: v3.17.0
@@ -66,17 +70,12 @@ repos:
         args:
           - --base64-limit=4
           - --hex-limit=3
+        exclude: 'tests/'
 
   - repo: https://github.com/lyz-code/yamlfix/
     rev: 1.17.0
     hooks:
       - id: yamlfix
-
-  - repo: https://github.com/espressif/cz-plugin-espressif
-    rev: v1.0.1
-    hooks:
-      - id: update-changelog
-        files: ^pyproject\.toml$
 
   - repo: local
     hooks:

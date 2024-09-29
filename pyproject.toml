@@ -26,14 +26,14 @@
     dependencies = ["commitizen>=3.29.0"]
 
     [project.optional-dependencies]
-        dev = [
-            "just-bin~=1.26.0",
-            "pip-tools~=7.3",
+        dev = ["just-bin~=1.26.0", "pip-tools~=7.3", "pre-commit~=3.3.0", "twine~=5.1.1"]
+        test = [
             "pytest-cov~=4.1.0",
+            "pytest-mock~=3.14.0",
+            "pytest-sugar~=1.0.0",
             "pytest~=7.4.0",
-            "twine~=5.1.1",
+            "syrupy~=4.7.0",
         ]
-        test = ["pytest-cov~=4.1.0", "pytest~=7.4.0"]
 
     [project.entry-points."commitizen.plugin"]
         czespressif = "czespressif:CzPluginEspressif"
@@ -61,21 +61,21 @@
     skip = 'tests/*'
 
 [tool.ruff]
-    extend-exclude = ["tests/.*"]
-    line-length    = 160
-
-    [tool.ruff.format]
-        quote-style = "single"
-
-    [tool.ruff.lint]
-        select = ["B", "C4", "C901", "E", "F", "I", "N", "PL", "S", "W"]
-
-        [tool.ruff.lint.isort]
-            force-single-line   = true
-            lines-between-types = 1
+    extend-exclude = []
+    format.docstring-code-format = true
+    format.quote-style = "single"
+    line-length = 160
+    lint.exclude = ["tests"]
+    lint.isort.force-single-line = true
+    lint.isort.lines-between-types = 1
+    lint.per-file-ignores."tests/*" = [
+        "PLR0913", # PYLINT: Ignore Too many arguments in tests directory
+        "S101",    # BANDIT: Ignore use of assert in tests directory
+    ]
+    lint.select = ["B", "C4", "C901", "E", "F", "I", "N", "PL", "S", "W"]
 
 [tool.mypy]
-    exclude                = ["venv"]
+    exclude                = ["^__init__.py$", "^build/.*", "^dist/.*", "^docs/.*", "^tests/.*"]
     ignore_missing_imports = true
     packages               = "czespressif"
     pretty                 = true
@@ -84,7 +84,9 @@
     warn_return_any        = true
 
 [tool.pytest.ini_options]
-    addopts = "-s --log-cli-level DEBUG --cov=sample_python_app --cov-report=term"
+    addopts   = "--log-cli-level DEBUG --cov=czespressif --cov-report=term"
+    markers   = ["settings: mark test to use custom czespressif settings from pyproject.toml"]
+    testpaths = "tests"
 
 [tool.coverage.run]
     omit = ["*/tests/*", "__*__.py"]
