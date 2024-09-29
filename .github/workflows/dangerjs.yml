@@ -1,17 +1,19 @@
 ---
-name: DangerJS Pull Request linter
+name: 🎓 DangerJS Pull Request linter
 
 on:
-  pull_request_target:
-    types: [opened, edited, reopened, synchronize]
+  pull_request_target: {types: [opened, edited, reopened, synchronize]}
 
-permissions:
-  pull-requests: write
-  contents: write
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   pull-request-style-linter:
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: write
     steps:
       - name: Check out PR head
         uses: actions/checkout@v4
