@@ -14,53 +14,85 @@
 </div>
 <hr>
 
-## Unreleased
+## v1.3.0 (2024-08-30)
+
+### ✨ New features
+
+- **api**: rollback changes to JWT token handling *(Alice Johnson - b5e7a2d)*
+- **ui**: improve loading animations for dashboard page *(Diana White - c5d3e7a)*
 
 ### 🐛 Bug fixes
 
-- **changelog**: fix double title, header and footer on 'cz bump' *(Tomas Sebestik - cce3c00)*
+- **logging**: switch from console logs to structured JSON logging *(Eve Martin - d9b2c7e)*
+- correct typos in error messages displayed on UI *(Bob Smith - b7a4c5b)*
 
-### 📖 Documentation
+---
 
-- **docker-example**: add run_command.txt for running demo container *(Tomas Sebestik - 0fa8c2e)*
+## v1.2.0 (2024-07-15)
 
 ### 🔧 Code refactoring
 
-- **python-3.9**: refactor syntax and typing for python 3.9 *(Tomas Sebestik - 8de6c1d)*
+- optimize database queries for user data retrieval *(Charlie Green - e7c1d8b)*
 
 ---
 
-## v1.1.0 (2024-09-24)
-
-### ✨ New features
-
-- **changelog**: custom template for release notes (GH action) *(Tomas Sebestik - 19e8cec)*
+## v1.2.0.rc0 (2024-06-10)
 
 ### 🐛 Bug fixes
 
-- **github-actions**: update create-release.yml, missing "v" in version
-- (dependabot): update dependabot config file, team reviewers
-- (justfile): add recipe for local cleanup temp, manual tests *(Tomas Sebestik - f601dbf)*
+- **frontend**: correct layout issues in user profile page *(Bob Smith - c3e7b3b)*
 
 ### 📖 Documentation
 
-- **readme**: docs to automatic process of "Release notes" *(Tomas Sebestik - 6a18980)*
+- update API documentation for user endpoint *(Eve Martin - f8d7e1c)*
 
 ---
 
-## v1.0.1 (2024-09-10)
+## v1.1.0 (2024-05-23)
 
 ### 🐛 Bug fixes
 
-- **pre-commit**: change lang from system to python to be able install deps *(Tomas Sebestik - 7443af0)*
+- **api**: update response codes for failed logins *(Bob Smith - 1b7d1e7)*
+
+### 🗑️ Removals
+
+- delete old caching logic from request handlers *(Charlie Green - 8f0b3b9)*
 
 ---
 
-## v1.0.0 (2024-09-10)
+## v1.0.0 (2024-04-12)
+
+### 📖 Documentation
+
+- **frontend**: Update README for new build system integration *(Diana White - 7c6d91f)*
+
+---
+
+## v0.2.1 (2024-03-29)
 
 ### ✨ New features
 
-- **plugin**: add plugin, commit message questions, changelog template (#1) *(Tomas Sebestik - f2fa815)*
+- **api**: implement new authentication mechanism with JWT tokens *(Alice Johnson - b2c7e8a)*
+
+### 🐛 Bug fixes
+
+- resolve null pointer exception in user session management *(Bob Smith - 4b1d62b)*
+
+---
+
+## v0.2.0 (2024-03-02)
+
+### ✨ New features
+
+- **api**: implement new authentication mechanism with JWT tokens *(Alice Johnson - b2c7e8a)*
+
+### 🐛 Bug fixes
+
+- resolve null pointer exception in user session management *(Bob Smith - 4b1d62b)*
+
+---
+
+## v0.1.0 (2024-02-15)
 
 ---
 
@@ -75,3 +107,4 @@
         <sup><a href="https://www.espressif.com">Espressif Systems CO LTD. (2024)</a><sup>
     </small>
 </div>
+
