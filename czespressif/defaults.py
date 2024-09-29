@@ -1,11 +1,9 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import Dict
-from typing import List
 from typing import Literal
 
-TYPES: List[Dict] = [  # this is order in changelog
+TYPES: list[dict] = [  # this is order in changelog
     {
         'type': 'BREAKING CHANGE',
         'description': 'Changes that are not backward-compatibles',
@@ -129,4 +127,4 @@ INCREMENT = Literal['MAJOR', 'MINOR', 'PATCH']
 # Currently BUMP_MESSAGE not possible to define default here - if not provided from pyproject.toml, it will be commitizen default, not ours :(
 BUMP_MESSAGE: str = 'change(bump): release $current_version → $new_version [skip-ci]'
 
-ESCAPE_MARKDOWN_SEQ: List[str] = [r'_{', r'}_']
+ESCAPE_MARKDOWN_SEQ: list[str] = [r'_{', r'}_']

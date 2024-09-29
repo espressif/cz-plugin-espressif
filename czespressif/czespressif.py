@@ -1,12 +1,11 @@
+from __future__ import annotations
+
 import itertools
 import re
 
 from collections import OrderedDict
+from collections.abc import Iterable
 from typing import Any
-from typing import Dict
-from typing import Iterable
-from typing import List
-from typing import Union
 
 from commitizen.cz.base import BaseCommitizen
 from commitizen.cz.base import BaseConfig
@@ -30,8 +29,8 @@ class CzPluginEspressif(BaseCommitizen):  # pylint: disable=abstract-method
         self.cze_config = CzEspressifConfig(config.settings)
 
     @property
-    def known_types(self) -> Dict[str, CommitType]:
-        return dict(itertools.chain(((t.type, t) for t in self.cze_config.known_types)))
+    def known_types(self) -> dict[str, CommitType]:
+        return dict(itertools.chain((t.type, t) for t in self.cze_config.known_types))
 
     @property
     def re_known_types(self) -> str:
@@ -43,7 +42,7 @@ class CzPluginEspressif(BaseCommitizen):  # pylint: disable=abstract-method
         return rf'\A({re_known_types})(\(.+\))?(!)?'
 
     @property
-    def change_type_map(self) -> Dict[str, str]:
+    def change_type_map(self) -> dict[str, str]:
         return dict(
             itertools.chain(
                 ((t.type, f'{t.emoji + " " if self.cze_config.use_emoji and t.emoji else ""}{t.heading}') for t in self.cze_config.known_types if t.heading),
@@ -51,7 +50,7 @@ class CzPluginEspressif(BaseCommitizen):  # pylint: disable=abstract-method
         )
 
     @property
-    def change_type_order(self) -> List[str]:
+    def change_type_order(self) -> list[str]:
         return [
             f'{commit_type.emoji} {commit_type.heading}' if self.cze_config.use_emoji and commit_type.emoji else commit_type.heading
             for commit_type in self.cze_config.known_types
@@ -65,7 +64,7 @@ class CzPluginEspressif(BaseCommitizen):  # pylint: disable=abstract-method
         return rf'^((({re_types})(\(.+\))?(!)?)|\w+!):'
 
     @property
-    def bump_map(self) -> Dict[str, INCREMENT]:
+    def bump_map(self) -> dict[str, INCREMENT]:
         """
         Mapping the extracted information to a SemVer increment type (MAJOR, MINOR, PATCH)
         """
@@ -77,7 +76,7 @@ class CzPluginEspressif(BaseCommitizen):  # pylint: disable=abstract-method
         )
 
     @property
-    def bump_map_major_version_zero(self) -> Dict[str, INCREMENT]:
+    def bump_map_major_version_zero(self) -> dict[str, INCREMENT]:
         return OrderedDict((pattern, increment.replace('MAJOR', 'MINOR')) for pattern, increment in self.bump_map.items())  # type: ignore
 
     @property
@@ -92,13 +91,13 @@ class CzPluginEspressif(BaseCommitizen):  # pylint: disable=abstract-method
         )
 
     @property
-    def template_extras(self) -> Dict[str, Any]:
+    def template_extras(self) -> dict[str, Any]:
         return {'config': self.cze_config, 'settings': self.cze_config.settings}
 
     def questions(self) -> Questions:
         return get_questions(self.cze_config)
 
-    def message(self, answers: Dict[str, Any]) -> str:
+    def message(self, answers: dict[str, Any]) -> str:
         prefix = answers['type']
         scope = answers['scope']
         subject = answers['subject']
@@ -135,7 +134,7 @@ class CzPluginEspressif(BaseCommitizen):  # pylint: disable=abstract-method
             message = re.sub(issue, lambda match: match.group(0).replace('_', r'\_'), message)
         return message
 
-    def changelog_message_builder_hook(self, parsed_message: Dict[str, Any], commit: Any) -> Union[Dict[str, Any], Iterable[Dict[str, Any]], None]:  # pylint: disable=unused-argument
+    def changelog_message_builder_hook(self, parsed_message: dict[str, Any], commit: Any) -> dict[str, Any] | Iterable[dict[str, Any]] | None:  # pylint: disable=unused-argument
         # Remap breaking changes type
         if parsed_message.get('breaking'):
             parsed_message['change_type'] = 'BREAKING CHANGE'
@@ -161,7 +160,7 @@ class CzPluginEspressif(BaseCommitizen):  # pylint: disable=abstract-method
 
         return parsed_message
 
-    def changelog_hook(self, full: str, partial: Union[str, None]) -> str:
+    def changelog_hook(self, full: str, partial: str | None) -> str:
         """Process resulting changelog to keep 1 empty line at the end of the file."""
         changelog = partial or full
         return changelog.rstrip() + '\n'

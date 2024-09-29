@@ -42,14 +42,6 @@
 
 ---
 
-## v0.1.0 (2024-09-07)
-
-### ✨ New features
-
-- init commit, project basic structure (from template commitizen) *(Tomas Sebestik - 61c03ec)*
-
----
-
 **[Espressif Systems CO LTD. (2024)](https://www.espressif.com/)**
 
 - [Commitizen tools plugin with Espressif code style](https://www.github.com/espressif/cz-plugin-espressif)

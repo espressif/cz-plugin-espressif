@@ -1,4 +1,4 @@
-from typing import List
+from __future__ import annotations
 
 from czespressif.config import CommitType
 
@@ -13,7 +13,7 @@ BLUE = '\033[94m'
 RESET = '\033[0m'
 
 
-def build_example(types: List[CommitType], extra_types: List[CommitType]) -> str:
+def build_example(types: list[CommitType], extra_types: list[CommitType]) -> str:
     """
     'cz example' command output.
     Generate an example guide for commit message schema and conventions.
