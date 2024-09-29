@@ -1,8 +1,10 @@
+from __future__ import annotations
+
 from typing import Any
-from typing import Dict
-from typing import List
 
 from commitizen.cz import exceptions
+
+from czespressif.config import CzEspressifConfig
 
 
 def required_validator(answer: str, msg: str = '') -> str:
@@ -30,7 +32,7 @@ def parse_subject(text: str) -> str:
     return required_validator(text, msg='Subject is required.')
 
 
-def get_questions(cze_config) -> List[Dict[str, Any]]:
+def get_questions(cze_config: CzEspressifConfig) -> list[dict[str, Any]]:
     """Questions regarding the commit message."""
 
     type_padding = 10  # Define the padding for the type part

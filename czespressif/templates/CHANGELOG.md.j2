@@ -41,7 +41,7 @@
 {% endfor %}{# Sections--- #}
 
 {# keep empty line above this comment #}
-{% if config.changelog_section_line %}{# ---IF-Section line, only if not the last release #}
+{% if not loop.last and config.changelog_section_line %}{# ---IF-Section line, only if not the last release #}
 ---
 
 {% endif %}{# IF-Section line--- #}

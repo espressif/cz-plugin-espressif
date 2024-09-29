@@ -1,22 +1,21 @@
 [project]
     authors = [
-        { name = "Tomas Sebestik", email = "tomas.sebestik@espressif.com" },
         { name = "Espressif Systems" },
+        { name = "Tomas Sebestik", email = "tomas.sebestik@espressif.com" },
     ]
     classifiers = [
         "Intended Audience :: Developers",
-        "Natural Language :: English",
-        "Operating System :: POSIX",
-        "Operating System :: Microsoft :: Windows",
-        "Operating System :: MacOS :: MacOS X",
         "License :: OSI Approved :: Apache Software License",
+        "Natural Language :: English",
+        "Operating System :: MacOS :: MacOS X",
+        "Operating System :: Microsoft :: Windows",
+        "Operating System :: POSIX",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
         "Programming Language :: Python :: 3.12",
+        "Programming Language :: Python :: 3.9",
     ]
-    dependencies = ["commitizen>=3.29.0"]
     description = "Commitizen plugin with Espressif code style"
     dynamic = ["version"]
     license = { text = "Apache 2.0" }
@@ -24,13 +23,15 @@
     readme = "README.md"
     requires-python = ">=3.9"
 
+    dependencies = ["commitizen>=3.29.0"]
+
     [project.optional-dependencies]
         dev = [
-            "twine~=5.1.1",
+            "just-bin~=1.26.0",
             "pip-tools~=7.3",
             "pytest-cov~=4.1.0",
             "pytest~=7.4.0",
-            "just-bin~=1.26.0",
+            "twine~=5.1.1",
         ]
         test = ["pytest-cov~=4.1.0", "pytest~=7.4.0"]
 
@@ -59,57 +60,31 @@
 [tool.codespell]
     skip = 'tests/*'
 
-[tool.pylint]
-    [tool.pylint.MASTER]
-        ignore-paths = ["tests/.*"]
-    [tool.pylint.'BASIC']
-        variable-rgx = "[a-z_][a-z0-9_]{1,30}$"
-    [tool.pylint.'MESSAGES CONTROL']
-        disable = [
-            "duplicate-code",
-            "fixme",
-            "import-error",
-            "import-outside-toplevel",
-            "logging-fstring-interpolation",
-            "missing-class-docstring",
-            "missing-function-docstring",
-            "missing-module-docstring",
-            "no-name-in-module",
-            "too-few-public-methods",
-            "too-many-branches",
-            "too-many-locals",
-            "too-many-return-statements",
-            "too-many-instance-attributes",
-            "too-many-statements",
-            "ungrouped-imports",
-        ]
-    [tool.pylint.'FORMAT']
-        max-line-length = 160
-
 [tool.ruff]
-    exclude        = ["tests/.*"]
+    extend-exclude = ["tests/.*"]
     line-length    = 160
-    lint.select    = ["B", "E", "F", "I", "S", "W"]
-    target-version = "py39"
 
     [tool.ruff.format]
         quote-style = "single"
 
-    [tool.ruff.lint.isort]
-        force-single-line   = true
-        lines-between-types = 1
+    [tool.ruff.lint]
+        select = ["B", "C4", "C901", "E", "F", "I", "N", "PL", "S", "W"]
+
+        [tool.ruff.lint.isort]
+            force-single-line   = true
+            lines-between-types = 1
 
 [tool.mypy]
+    exclude                = ["venv"]
     ignore_missing_imports = true
+    packages               = "czespressif"
+    pretty                 = true
     python_version         = "3.9"
-    strict                 = false
+    warn_redundant_casts   = true
+    warn_return_any        = true
 
 [tool.pytest.ini_options]
-    addopts          = "-s --log-cli-level DEBUG --cov=sample_python_app --cov-report=term"
-    python_classes   = ["Test*"]
-    python_files     = ["test_*.py"]
-    python_functions = ["test_*"]
-    testpaths        = ["tests"]
+    addopts = "-s --log-cli-level DEBUG --cov=sample_python_app --cov-report=term"
 
 [tool.coverage.run]
     omit = ["*/tests/*", "__*__.py"]
@@ -126,6 +101,7 @@
     annotated_tag              = true
     bump_message               = 'change(bump): release $current_version → $new_version [skip-ci]'
     changelog_merge_prerelease = true
+    changelog_start_rev        = "v0.1.0"
     name                       = "czespressif"
     tag_format                 = "v$version"
     update_changelog_on_bump   = true

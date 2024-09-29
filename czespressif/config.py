@@ -8,9 +8,7 @@ from dataclasses import field
 from dataclasses import fields
 from functools import cached_property
 from functools import total_ordering
-from typing import Dict
-from typing import List
-from typing import Union
+from typing import cast
 
 from commitizen.config import read_cfg
 from commitizen.defaults import Settings
@@ -27,26 +25,30 @@ from czespressif.defaults import TYPES
 class CommitType:
     type: str  # Key used as type in the commit header.
     description: str  # A human-readable description of the type.
-    heading: Union[str, None] = None  # The resulting heading in the changelog for this type.
-    emoji: Union[str, None] = None  # An optional emoji representing the type.
+    heading: str | None = None  # The resulting heading in the changelog for this type.
+    emoji: str | None = None  # An optional emoji representing the type.
     changelog: bool = True  # Whether this type should appear in the changelog or not.
     question: bool = True  # Whether this type should appear in the question choices.
-    bump: Union[INCREMENT, None] = None  # Specifies the version bump category (e.g., 'MAJOR', 'MINOR', 'PATCH').
-    regex: Union[str, None] = None  # An optional regular expression matching this type.
+    bump: INCREMENT | None = None  # Specifies the version bump category (e.g., 'MAJOR', 'MINOR', 'PATCH').
+    regex: str | None = None  # An optional regular expression matching this type.
 
     def __str__(self) -> str:
         return self.type
 
-    def __hash__(self):
+    def __hash__(self) -> int:
         return hash(self.type)
 
-    def __eq__(self, other) -> bool:
-        return self._compare_key(other) == 0
+    def __eq__(self, other: object) -> bool:
+        if isinstance(other, CommitType):
+            return self._compare_key(other) == 0
+        return NotImplemented
 
-    def __lt__(self, other) -> bool:
-        return self._compare_key(other) < 0
+    def __lt__(self, other: object) -> bool:
+        if isinstance(other, CommitType):
+            return self._compare_key(other) < 0
+        return NotImplemented
 
-    def _compare_key(self, other) -> int:
+    def _compare_key(self, other: object) -> int:
         """Helper method for comparing with either CommitType or str."""
         if isinstance(other, CommitType):
             other_type = other.type.lower()
@@ -57,30 +59,30 @@ class CommitType:
         return (self.type.lower() > other_type) - (self.type.lower() < other_type)
 
     @classmethod
-    def from_dict(cls, data: Dict) -> CommitType:
+    def from_dict(cls, data: dict) -> CommitType:
         """Creates a CommitType instance from a dictionary."""
         valid_fields = {f.name for f in fields(cls)}
         filtered_data = {k: v for k, v in data.items() if k in valid_fields}
         return cls(**filtered_data)
 
     @classmethod
-    def from_list(cls, lst: List[Dict]) -> List[CommitType]:
+    def from_list(cls, lst: list[dict]) -> list[CommitType]:
         """Creates a list of CommitType instances from a list of dictionaries."""
         return [cls.from_dict(d) for d in lst]
 
 
 class CzEspressifSettings(Settings):
-    types: Union[list[dict], None]
-    extra_types: Union[list[dict], None]
-    changelog_unreleased: Union[bool, None]
-    use_emoji: Union[bool, None]
-    changelog_title: Union[str, None]
-    changelog_header: Union[str, None]
-    changelog_footer: Union[str, None]
-    changelog_section_line: Union[bool, None]
-    changelog_show_commits: Union[bool, None]
-    changelog_show_authors: Union[bool, None]
-    release_notes_footer: Union[str, None]
+    types: list[dict] | None
+    extra_types: list[dict] | None
+    changelog_unreleased: bool | None
+    use_emoji: bool | None
+    changelog_title: str | None
+    changelog_header: str | None
+    changelog_footer: str | None
+    changelog_section_line: bool | None
+    changelog_show_commits: bool | None
+    changelog_show_authors: bool | None
+    release_notes_footer: str | None
 
 
 @dataclass
@@ -100,56 +102,47 @@ class CzEspressifConfig:
         return self.types + self.extra_types
 
     @property
-    def include_headers(self) -> bool:
-        # Check if the CLI arguments contain a version or range ('v1.2.3' or '1.2.3..4.5.6')
-        version_or_range = any(re.match(r'^\d+\.\d+\.\d+(\.\.\d+\.\d+\.\d+)?$', arg) for arg in sys.argv) or any(arg.startswith('v') for arg in sys.argv)
-        if version_or_range:
-            return False
+    def incremental(self) -> bool:
+        cli_version = any(re.match(r'^v?\d+\.\d+\.\d+$', arg) for arg in sys.argv)  # re: '(v)MAJOR.MINOR.PATCH'
+        cli_version_range = any(re.match(r'^v?\d+\.\d+\.\d+\.\.v?\d+\.\d+\.\d+$', arg) for arg in sys.argv)  # re: '(v)MAJOR.MINOR.PATCH..(v)MAJOR.MINOR.PATCH'
+        cli_incremental_flag = '--incremental' in sys.argv
+        cli_bump = 'bump' in sys.argv
 
-        # Check if the CLI arguments contain the incremental flag ('--incremental')
-        incremental_flag = '--incremental' in sys.argv
-        if incremental_flag:
-            return False
-
-        # Check if the CLI arguments contain the bump command ('bump')
-        bump = 'bump' in sys.argv
-        if bump:
-            return False
-
-        return True
+        is_incremental = any([cli_version, cli_version_range, cli_incremental_flag, cli_bump])
+        return cast(bool, self.settings.get('incremental', is_incremental))
 
     @property
     def changelog_unreleased(self) -> bool:
-        return self.settings.get('changelog_unreleased', True)
+        return cast(bool, self.settings.get('changelog_unreleased', True))
 
     @property
     def use_emoji(self) -> bool:
-        return self.settings.get('use_emoji', True)
+        return cast(bool, self.settings.get('use_emoji', True))
 
     @property
     def changelog_title(self) -> str:
-        return self.settings.get('changelog_title', CHANGELOG_TITLE)
+        return cast(str, self.settings.get('changelog_title', CHANGELOG_TITLE))
 
     @property
     def changelog_header(self) -> str:
-        return self.settings.get('changelog_header', CHANGELOG_HEADER)
+        return cast(str, self.settings.get('changelog_header', CHANGELOG_HEADER))
 
     @property
     def changelog_footer(self) -> str:
-        return self.settings.get('changelog_footer', CHANGELOG_FOOTER)
+        return cast(str, self.settings.get('changelog_footer', CHANGELOG_FOOTER))
 
     @property
     def changelog_section_line(self) -> bool:
-        return self.settings.get('changelog_section_line', True)
+        return cast(bool, self.settings.get('changelog_section_line', True))
 
     @property
     def changelog_show_commits(self) -> bool:
-        return self.settings.get('changelog_show_commits', True)
+        return cast(bool, self.settings.get('changelog_show_commits', True))
 
     @property
     def changelog_show_authors(self) -> bool:
-        return self.settings.get('changelog_show_authors', True)
+        return cast(bool, self.settings.get('changelog_show_authors', True))
 
     @property
     def release_notes_footer(self) -> str:
-        return self.settings.get('release_notes_footer', None)
+        return cast(str, self.settings.get('release_notes_footer', ''))
