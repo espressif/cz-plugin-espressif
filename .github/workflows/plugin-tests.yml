@@ -5,15 +5,16 @@ on:
   pull_request:
   push: {branches: master}
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  plugin-tests:
+  linux-tests:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
     strategy:
       matrix:
         python-version: ['3.9', '3.10', '3.11', '3.12']
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -24,14 +25,68 @@ jobs:
           python-version: ${{ matrix.python-version }}
           cache: pip
 
-      - name: Install dependencies
+      - name: Install dependencies (Linux)
         run: |
           python -m venv venv
           source venv/bin/activate
           pip install --require-virtualenv --upgrade pip
           pip install --require-virtualenv '.[test]'
 
-      - name: Run pytest, compare output with stored snapshots
-        run: |-
+      - name: Run pytest, compare output with stored snapshots (Linux)
+        run: |
           source venv/bin/activate
           pytest -s
+
+  macos-tests:
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        python-version: ['3.9', '3.10', '3.11', '3.12']
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install dependencies (macOS)
+        run: |
+          python -m venv venv
+          source venv/bin/activate
+          pip install --require-virtualenv --upgrade pip
+          pip install --require-virtualenv '.[test]'
+
+      - name: Run pytest, compare output with stored snapshots (macOS)
+        run: |
+          source venv/bin/activate
+          pytest -s
+
+  windows-tests:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        python-version: ['3.9', '3.10', '3.11', '3.12']
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install dependencies (Windows)
+        run: |
+          python -m venv venv
+          venv\Scripts\python.exe -m pip install --require-virtualenv --upgrade pip
+          venv\Scripts\python.exe -m pip install --require-virtualenv .[test]
+        shell: cmd
+
+      - name: Run pytest, compare output with stored snapshots (Windows)
+        run: |
+          venv\Scripts\python.exe -m pytest -s
+        shell: cmd

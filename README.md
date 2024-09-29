@@ -2,7 +2,7 @@
     <img src="https://www.espressif.com/sites/all/themes/espressif/logo-black.svg" alt="Espressif logo" title="Espressif" align="right" height="20" />
 </a>
 
-# Commitizen plugin Espressif
+# Commitizen plugin czEspressif
 
 This is a plugin for Commitizen that makes it easy to create and maintain a well-organized and good-looking `CHANGELOG.md`. It also takes care of version bumping and helps you write commit messages that follow Espressif standards.
 
@@ -16,15 +16,16 @@ All of this with minimal config and setup, so your `pyproject.toml` file stays c
     <img alt="GitHub Release" src="https://img.shields.io/github/v/release/espressif/cz-plugin-espressif? display_name=release&logo=github&logoColor=white&label=Release">
     <img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/czespressif?logo=pypi&logoColor=white&label=Pythons&link=https%3A%2F%2Fpypi.org%2Fproject%2Fczespressif%2F">
     <img alt="Static Badge" src="https://img.shields.io/badge/pip%20install-czespressif-black?logo=python&logoColor=white">
+    <a href="/LICENSE"><img alt="Project License" src="https://img.shields.io/pypi/l/czespressif"/></a>
     <br>
     <img alt="GitHub contributors" src="https://img.shields.io/github/contributors/espressif/cz-plugin-espressif?logo=github&label=Contributors&color=purple">
     <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/y/espressif/cz-plugin-espressif?logo=git&logoColor=white&label=Commits&color=purple">
     <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/espressif/cz-plugin-espressif?logo=git&logoColor=white&label=Last%20commit">
     <img alt="PyPI - Downloads" src="https://img.shields.io/pypi/dm/czespressif?logo=pypi&logoColor=white&label=PyPI%20downloads&color=blue&cacheSeconds=3600&link=https%3A%2F%2Fpypi.org%2Fproject%2Fczespressif%2F">
-    <a href="/LICENSE"><img alt="Project License" src="https://img.shields.io/pypi/l/czespressif"/></a>
     <br>
-    <img alt="GitHub workflow SyncJira" src="https://img.shields.io/github/actions/workflow/status/espressif/cz-plugin-espressif/.github%2Fworkflows%2Fsync-jira.yml?branch=master&logo=jirasoftware&label=Sync with Jira">
-    <img alt="itHub workflow CodeQL" src="https://img.shields.io/github/actions/workflow/status/espressif/cz-plugin-espressif/.github%2Fworkflows%2Fcode-ql.yml?branch=master&label=CodeQL">
+    <img alt="GitHub workflow Tests Pytest" src="https://img.shields.io/github/actions/workflow/status/espressif/cz-plugin-espressif/.github%2Fworkflows%2Fplugin-tests.yml?branch=master&logo=pytest&logoColor=white&label=Tests&link=https%3A%2F%2Fgithub.com%2Fespressif%2Fcz-plugin-espressif%2Factions%2Fworkflows%2Fplugin-tests.yml">
+    <img alt="GitHub workflow SyncJira" src="https://img.shields.io/github/actions/workflow/status/espressif/cz-plugin-espressif/.github%2Fworkflows%2Fsync-jira.yml?branch=master&logo=jirasoftware&label=Sync with Jira&link=https%3A%2F%2Fgithub.com%2Fespressif%2Fcz-plugin-espressif%2Factions%2Fworkflows%2Fsync-jira.yml">
+    <img alt="GitHub workflow CodeQL" src="https://img.shields.io/github/actions/workflow/status/espressif/cz-plugin-espressif/.github%2Fworkflows%2Fcode-ql.yml?branch=master&label=CodeQL">
   </p>
   <small>
     <b>
@@ -36,7 +37,7 @@ All of this with minimal config and setup, so your `pyproject.toml` file stays c
   <hr>
 </div>
 
-- [Commitizen plugin Espressif](#commitizen-plugin-espressif)
+- [Commitizen plugin czEspressif](#commitizen-plugin-czespressif)
   - [Features](#features)
   - [Compatibility](#compatibility)
   - [Install](#install)

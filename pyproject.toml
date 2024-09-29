@@ -61,18 +61,14 @@
     skip = 'tests/*'
 
 [tool.ruff]
-    extend-exclude = []
-    format.docstring-code-format = true
-    format.quote-style = "single"
-    line-length = 160
-    lint.exclude = ["tests"]
-    lint.isort.force-single-line = true
+    extend-exclude                 = []
+    format.docstring-code-format   = true
+    format.quote-style             = "single"
+    line-length                    = 160
+    lint.exclude                   = ["tests/**/*"]
+    lint.isort.force-single-line   = true
     lint.isort.lines-between-types = 1
-    lint.per-file-ignores."tests/*" = [
-        "PLR0913", # PYLINT: Ignore Too many arguments in tests directory
-        "S101",    # BANDIT: Ignore use of assert in tests directory
-    ]
-    lint.select = ["B", "C4", "C901", "E", "F", "I", "N", "PL", "S", "W"]
+    lint.select                    = ["B", "C4", "C901", "E", "F", "I", "N", "PL", "S", "UP", "W"]
 
 [tool.mypy]
     exclude                = ["^__init__.py$", "^build/.*", "^dist/.*", "^docs/.*", "^tests/.*"]

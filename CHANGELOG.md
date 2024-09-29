@@ -32,6 +32,18 @@
 
 ## v1.1.0 (2024-09-24)
 
+### 🐛 Bug fixes
+
+- **changelog**: fix double title, header and footer on 'cz bump' *(Tomas Sebestik - f715e63)*
+
+### 📖 Documentation
+
+- **docker-example**: add run_command.txt for running demo container *(Tomas Sebestik - 0fa8c2e)*
+
+---
+
+## v1.1.0 (2024-09-24)
+
 ### ✨ New features
 
 - **changelog**: custom template for release notes (GH action) *(Tomas Sebestik - 19e8cec)*

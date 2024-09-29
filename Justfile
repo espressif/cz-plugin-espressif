@@ -1,23 +1,27 @@
-set quiet := true
-set positional-arguments := true
+# This Justfile contains rules/targets/scripts/commands that are used when
+# developing. Unlike a Makefile, running `just <cmd>` will always invoke
+# that command. For more information, see https://github.com/casey/just
 
+# This setting will allow passing arguments through to recipes
+set positional-arguments
+
+# Parse current version from pyproject.toml
+current_version := `grep -Po 'version\s*=\s*"\K[^"]*' pyproject.toml | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+'`
+
+# Custom git log format
+gitstyle := '%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'
+
+
+# Helper function for quick menu
 [private]
 @default:
     just --list
 
-exit:
-    exit 0
 
 # ... Edit this Justfile
 @edit-just:
     $EDITOR ./Justfile
 
-build-install:
-    pip uninstall -y czespressif
-    python -m build
-    pip install .
-    cz example
-    just get-versions
 
 # PROJECT: Release version info and list of commits since last release
 @version:
@@ -25,8 +29,6 @@ build-install:
     echo "\nCommits since last release:"; \
     git log -n 30 --graph --pretty="{{gitstyle}}" v{{current_version}}..HEAD
 
-release-notes-show:
-    cz changelog v1.0.0 --template="RELEASE_NOTES.md.j2" --dry-run
 
 # PROJECT: Install development environment
 @install:
@@ -38,44 +40,25 @@ release-notes-show:
 @lock-requirements:
     pip-compile --strip-extras --output-file=requirements.txt pyproject.toml > /dev/null
 
-release-notes-file:
-    cz changelog v1.0.0 --template="RELEASE_NOTES.md.j2" --file-name="Release_notes.md"
 
-tests:
-    echo "Maximize terminal ...." && just get-versions && sleep 2 && clear
-    just dry-bump && sleep 3 && clear
-    just info && sleep 2 && clear
-    just example && sleep 2 && clear
-    just schema && sleep 2 && clear
-    just changelog-show && sleep 5 && clear
-    just release-notes-show && sleep 5 && clear
-    echo "Resize terminal, tests ends ...." && just get-versions && sleep 2 && clear
-
-live-install:
-    pip uninstall -y czespressif
-    pip install -e '.[dev]'
-    pip install --upgrade pip
-    cz example
-    just get-versions
-
-clean-temps:
+# PROJECT: Remove caches, builds, reports and other generated files
+@clean:
     rm -rf \
-        dist \
-        .pytest_cache \
-        .mypy_cache \
         .coverage \
         .coverage.* \
+        .mypy_cache \
+        .pytest_cache \
         .ruff_cache \
         *.egg-info \
         **/__pycache__/ \
         build \
         **/__pycache__/ \
+        **/*.test.md \
+        build \
         demo \
         dist \
         :
 
-docker-build:
-    cd docker && docker build -t tomasad/czespressif-demo . && cd -
 
 # PROJECT: Build and check distribution package
 @build:
@@ -83,8 +66,6 @@ docker-build:
     python -m build
     twine check dist/*
 
-docker-run:
-    docker run --rm -v $(pwd):/app -u $(id -u):$(id -g) tomasad/czespressif-demo
 
 # PROJECT:
 @bump-test:

@@ -1,4 +1,7 @@
+__pycache__/
+_version.py
 .mypy_cache/
+*.egg-info/
 /.coverage
 /.coverage.*
 /.nox/
@@ -6,14 +9,6 @@
 /.pytype/
 /dist/
 /docs/_build/
-*.egg-info/
-__pycache__/
-_version.py
 demo/
+output/
 TODO.md
-
-# Local test to create Release notes
-Release_notes.md
-
-# Local test to create full CHANGELOG
-CHANGELOG-output.md
