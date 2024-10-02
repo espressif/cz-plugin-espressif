@@ -36,6 +36,12 @@ gitstyle := '%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s
     pip install --require-virtualenv --upgrade pip
 
 
+# PROJECT: Install and update pre-commit hooks
+@install-precommit:
+    pre-commit install
+    pre-commit autoupdate
+
+
 # PROJECT: Re-compile requirements.txt from dev-dependencies in pyproject.toml
 @lock-requirements:
     pip-compile --strip-extras --output-file=requirements.txt pyproject.toml > /dev/null
@@ -67,14 +73,7 @@ gitstyle := '%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s
     twine check dist/*
 
 
-# PROJECT:
-@bump-test:
-    clear
-    pre-commit run --all-files
-    cz bump --dry-run
-
-
-# PYTEST: Run tests with coverage report
+## PYTEST: Run tests with coverage report
 @test:
     pytest
 
@@ -117,40 +116,3 @@ gitstyle := '%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s
 @rebase base="master":
     git fetch origin {{base}}
     git rebase -i origin/{{base}}
-
-
-# ----------------------------------------------
-
-@generate-cz-bump:
-    clear
-    cz bump --dry-run | tee "output/cz-bump.test.md"
-
-
-@generate-cz-example:
-    clear
-    cz example | tee "output/cz-example.test.md"
-
-
-@generate-cz-info:
-    clear
-    cz info | tee "output/cz-info.test.md"
-
-
-@generate-cz-schema:
-    clear
-    cz schema | tee "output/cz-schema.test.md"
-
-
-@generate-changelog:
-    clear
-    cz changelog --dry-run | tee "output/CHANGELOG.test.md"
-
-
-@generate-changelog-incremental:
-    clear
-    cz changelog --incremental --dry-run | tee "output/CHANGELOG-incremental.test.md"
-
-
-@generate-release-notes:
-    clear
-    cz changelog v1.1.0 --template="RELEASE_NOTES.md.j2" --dry-run | tee "output/RELEASE_NOTES.test.md"

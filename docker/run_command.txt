@@ -1,0 +1,1 @@
+docker run --rm -v $(pwd):/app -u $(id -u):$(id -g) tomasad/czespressif-demo

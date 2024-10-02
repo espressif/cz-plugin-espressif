@@ -52,7 +52,7 @@ All of this with minimal config and setup, so your `pyproject.toml` file stays c
     - [Optimal setup](#optimal-setup)
     - [Additional configurable parameters](#additional-configurable-parameters)
   - [Solving Troubles](#solving-troubles)
-  - [Pre-commit hook](#pre-commit-hook)
+  - [Pre-commit hook (beta)](#pre-commit-hook-beta)
   - [Contributing](#contributing)
   - [License](#license)
   - [Credits](#credits)
@@ -107,11 +107,17 @@ cz example
 > commitizen itself is in the plugin's dependencies, so pip will take care of everything.
 
 > \[!WARNING\]
-> Don't try to install it system-wide with `pipx`, it probably not going to work as you expect.
+> Don't try to install it system-wide with `pipx`; it likely won't work as expected.
+> (This option will be explored in the future, and once a solution is found, we will update this recommendation.)
 
 ---
 
 ## Usage
+
+> \[!TIP\]
+> You can check the implementation of this command in the GitHub workflow [.github/workflows/create-release.yml](.github/workflows/create-release.yml) if you're interested.
+> In this project's [tests/**snapshots**/test_changelog/](tests/__snapshots__/test_changelog/) directory, we store snapshots used for automated testing. These snapshots **also serve as examples of the plugin's output**.
+> You can explore them and compare the plugin output (`test_changelog_czespressif_*.md`) with the default Commitizen output (`test_changelog_cz_default_*.md`), which is generated when our plugin is not used.
 
 ### Create Changelog file
 
@@ -205,22 +211,22 @@ Config is accepted in `pyproject.toml` (priority, following example), `.cz.toml`
 
 ```ini
 [tool.commitizen]
-   name            = "czespressif"
-   bump_message    = 'change(bump): release $current_version → $new_version [skip-ci]'
+   name                      = "czespressif"
+   bump_message              = 'change(bump): release $current_version → $new_version [skip-ci]'
 ```
 
 ### Optimal setup
 
 ```ini
 [tool.commitizen]
-  name            = "czespressif"
-  bump_message    = 'change(bump): release $current_version → $new_version [skip-ci]'
+  name                       = "czespressif"
+  bump_message               = 'change(bump): release $current_version → $new_version [skip-ci]'
 
   # see commitizen docs, following are standard configs
-  annotated_tag = true
+  annotated_tag              = true
   changelog_merge_prerelease = true
-  tag_format = "v$version"
-  update_changelog_on_bump = true
+  tag_format                 = "v$version"
+  update_changelog_on_bump   = true
   version                    = "1.2.3"
   version_files              = ["<src>/__init__.py:__version__"]
   version_provider           = "commitizen"
@@ -355,7 +361,7 @@ fi
 
 ---
 
-## Pre-commit hook
+## Pre-commit hook (beta)
 
 To automatically keep your changelog's "Unreleased" section up to date, add the following to your `.pre-commit-config.yaml` file:
 
