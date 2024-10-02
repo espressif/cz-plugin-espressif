@@ -2,4 +2,4 @@ from czespressif.czespressif import CzPluginEspressif  # type: ignore[attr-defin
 
 __all__ = ['CzPluginEspressif']
 
-__version__ = '1.1.0'
+__version__ = '1.2.0'

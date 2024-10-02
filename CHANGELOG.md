@@ -14,22 +14,23 @@
 </div>
 <hr>
 
-## Unreleased
+## v1.2.0 (2024-10-02)
+
+### ✨ New features
+
+- **test-suite**: add tests changelog/plugin, compare with snapshots (syrupy module) *(Tomas Sebestik - c4d78e3)*
 
 ### 🐛 Bug fixes
 
-- **changelog**: fix double title, header and footer on 'cz bump' *(Tomas Sebestik - 0b8c6ae)*
+- **changelog**: fix double title, header and footer on 'cz bump' *(Tomas Sebestik - b5a1227)*
 
 ### 📖 Documentation
 
-- **contributing**: update docs for setup dev environment and testing *(Tomas Sebestik - 4c88334)*
-- **docker-example**: add run_command.txt for running demo container *(Tomas Sebestik - 4c88334)*
+- **contributing**: update docs for setup dev environment and testing *(Tomas Sebestik - dfca4d6)*
 
 ### 🔧 Code refactoring
 
-- **python-3.9**: refactor syntax and typing for python 3.9 *(Tomas Sebestik - bb57d37)*
-
----
+- **python-3.9**: refactor syntax and typing for python 3.9 *(Tomas Sebestik - e5a83c6)*
 
 ## v1.1.0 (2024-09-24)
 
