@@ -80,7 +80,7 @@
     warn_return_any        = true
 
 [tool.pytest.ini_options]
-    addopts   = "--log-cli-level DEBUG --cov=czespressif --cov-report=term"
+    addopts   = "-s --log-cli-level DEBUG --cov=czespressif --cov-report=term"
     markers   = ["settings: mark test to use custom czespressif settings from pyproject.toml"]
     testpaths = "tests"
 

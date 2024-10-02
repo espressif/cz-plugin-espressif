@@ -18,27 +18,16 @@
 
 ### 🐛 Bug fixes
 
-- **changelog**: fix double title, header and footer on 'cz bump' *(Tomas Sebestik - cce3c00)*
+- **changelog**: fix double title, header and footer on 'cz bump' *(Tomas Sebestik - 0b8c6ae)*
 
 ### 📖 Documentation
 
-- **docker-example**: add run_command.txt for running demo container *(Tomas Sebestik - 0fa8c2e)*
+- **contributing**: update docs for setup dev environment and testing *(Tomas Sebestik - 4c88334)*
+- **docker-example**: add run_command.txt for running demo container *(Tomas Sebestik - 4c88334)*
 
 ### 🔧 Code refactoring
 
-- **python-3.9**: refactor syntax and typing for python 3.9 *(Tomas Sebestik - 8de6c1d)*
-
----
-
-## v1.1.0 (2024-09-24)
-
-### 🐛 Bug fixes
-
-- **changelog**: fix double title, header and footer on 'cz bump' *(Tomas Sebestik - f715e63)*
-
-### 📖 Documentation
-
-- **docker-example**: add run_command.txt for running demo container *(Tomas Sebestik - 0fa8c2e)*
+- **python-3.9**: refactor syntax and typing for python 3.9 *(Tomas Sebestik - bb57d37)*
 
 ---
 
