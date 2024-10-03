@@ -1,9 +1,10 @@
 ---
 - id: update-changelog
-  name: Update changelog (section Unreleased)
-  entry: python -c 'import subprocess; subprocess.run("cz changelog > /dev/null", shell=True, check=True)'
+  name: update-changelog
+  description: Update changelog (section Unreleased)
+  entry: cz changelog --incremental
   language: python
   pass_filenames: false
-  description: Updates changelog - section Unreleased
   additional_dependencies:
     - czespressif
+  require_serial: true
