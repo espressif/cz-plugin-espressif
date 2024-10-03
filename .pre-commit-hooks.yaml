@@ -8,3 +8,4 @@
   additional_dependencies:
     - czespressif
   require_serial: true
+  stages: [pre-push]
