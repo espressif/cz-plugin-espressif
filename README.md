@@ -370,7 +370,6 @@ To automatically keep your changelog's "Unreleased" section up to date, add the 
   rev: ''
   hooks:
     - id: update-changelog
-      files: ^pyproject\.toml$ # Runs only if file with version changes
 ```
 
 Next, run the following command to fetch the latest version (`rev:`):
@@ -378,6 +377,14 @@ Next, run the following command to fetch the latest version (`rev:`):
 ```sh
 pre-commit autoupdate --repo https://github.com/espressif/cz-plugin-espressif
 ```
+
+If you have already set `default_install_hook_types`, then include `pre-push` in the list. Otherwise, add the following to your `.pre-commit-config.yaml` file:
+
+```yaml
+default_install_hook_types: [pre-commit, pre-push]
+```
+
+After installing the hook, it runs automatically before you pushing commits to the repository. It updates the changelog with the latest commits. If the push failed because of the hook, don't forget to add the updated changelog to the commit and push again.
 
 ---
 
