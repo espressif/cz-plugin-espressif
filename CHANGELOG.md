@@ -14,6 +14,16 @@
 </div>
 <hr>
 
+## v1.3.0 (2024-10-07)
+
+### ✨ New features
+
+- **pre-commit**: run in pre-push stage *(Fu Hanxi - 11c2d0a)*
+
+### 🐛 Bug fixes
+
+- pre-commit entry to support custom args *(Fu Hanxi - 36c6c4a)*
+
 ## v1.2.0 (2024-10-02)
 
 ### ✨ New features
@@ -31,6 +41,8 @@
 ### 🔧 Code refactoring
 
 - **python-3.9**: refactor syntax and typing for python 3.9 *(Tomas Sebestik - e5a83c6)*
+
+---
 
 ## v1.1.0 (2024-09-24)
 
