@@ -1,9 +1,10 @@
 # Code owners for the entire repository
-*                                       @tomassebestik @kumekay
+*                                       @tomassebestik
+
+
+# Code owners for an entire directory and its subdirectories
+.github/                                @espressif/ci
 
 # Code owners for individual files
 Justfile                                @tomassebestik
-
-# Code owners for an entire directory and its subdirectories
-.github/ISSUE_TEMPLATE/                 @tomassebestik
-.github/PULL_REQUEST_TEMPLATE           @tomassebestik
+.pre-commit-hooks.yaml                  @hfudev
