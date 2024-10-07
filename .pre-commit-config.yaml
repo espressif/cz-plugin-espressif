@@ -71,11 +71,14 @@ repos:
     hooks:
       - id: yamlfix
 
-  - repo: local
+  - repo: https://github.com/jazzband/pip-tools
+    rev: '7.4.1'
     hooks:
       - id: pip-compile
-        name: compile requirements.txt
-        entry: bash -c 'pip-compile --strip-extras --output-file=requirements.txt pyproject.toml > /dev/null'
-        language: system
-        pass_filenames: false
-        files: requirements.txt|pyproject.toml
+        name: pip-compile requirements.txt # Only project.dependencies
+        files: ^(requirements\.txt|pyproject\.toml)$
+        args: [--output-file=requirements.txt]
+      - id: pip-compile
+        name: pip-compile requirements-all.txt # Including all project.optional-dependencies
+        files: ^(requirements-all\.txt|pyproject\.toml)$
+        args: [--output-file=requirements-all.txt, --all-extras]
