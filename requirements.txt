@@ -9,7 +9,7 @@ charset-normalizer==3.3.2  # via commitizen
 colorama==0.4.6           # via commitizen
 commitizen==3.29.0        # via czespressif (pyproject.toml)
 decli==0.6.2              # via commitizen
-importlib-metadata==8.4.0  # via commitizen
+importlib-metadata==8.5.0  # via commitizen
 jinja2==3.1.4             # via commitizen
 markupsafe==2.1.5         # via jinja2
 packaging==24.1           # via commitizen
