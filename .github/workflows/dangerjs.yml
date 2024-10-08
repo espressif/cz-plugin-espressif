@@ -2,7 +2,7 @@
 name: 🎓 DangerJS Pull Request linter
 
 on:
-  pull_request_target: {types: [opened, edited, reopened, synchronize]}
+  pull_request: {types: [opened, edited, reopened, synchronize]}
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -17,8 +17,6 @@ jobs:
     steps:
       - name: Check out PR head
         uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
 
       - name: DangerJS pull request linter
         uses: espressif/shared-github-dangerjs@v1
