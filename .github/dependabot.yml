@@ -1,81 +1,47 @@
 ---
-# This dependabot.yml configuration takes precedence over the GitHub UI settings.
-# It defines how Dependabot will manage version and security updates for dependencies.
-# - Version updates (pip & GitHub Actions) are scheduled monthly and include only minor updates, excluding patch versions.
-# - Security updates (pip & GitHub Actions) are checked daily and grouped by critical or high-severity vulnerabilities.
-# - The configuration also specifies custom commit messages, reviewers, and labels to manage PRs effectively.
+# This Dependabot configuration enables automatic updates for pip and GitHub Actions.
+# This config file present in repo on path '.github/dependabot.yml' takes precedence over the GitHub UI settings.
+
+# After adding this config to a new repository, make sure to also:
+# 1. Enable "Dependabot alerts" in the repository settings under
+#    Settings > Security & Analysis > Code security > Dependabot alerts
+#    (unless it is already set at the organization level).
+# 2. Enable "Dependabot security updates" to automatically create PRs for vulnerable dependencies
+#    (unless it is already set at the organization level).
+# 3. Optionally, configure Dependabot rules in the Code security settings for additional alert management
 
 version: 2
 
 updates:
-  # PIP Version updates
   - package-ecosystem: pip
     versioning-strategy: increase-if-necessary
     directory: '/'
-    schedule: {interval: monthly, time: '09:00'}   # First day of the month, time UTC
-    groups:
-      pip-version-updates:
-        applies-to: version-updates
-        update-types: [minor] # Group only minor version updates (for major create separate PR, ignore patch)
-    ignore:
-      - dependency-name: '*'
-        update-types: ['version-update:semver-patch'] # Do not update patch versions
-    commit-message: {prefix: 'ci(deps-pip): [skip ci]'}
-    reviewers: ['tomassebestik']
-    labels: ['dependencies', 'Status: Reviewing']
-    pull-request-branch-name: {separator: '-'}
-    insecure-external-code-execution: deny
-
-  # PIP Security updates
-  - package-ecosystem: pip
-    versioning-strategy: increase-if-necessary
-    directory: '/'
-    schedule: {interval: daily, time: '09:00'}
-    open-pull-requests-limit: 0 # Only security updates
+    schedule: {interval: weekly, day: monday, time: '05:00', timezone: Europe/Prague}
     groups:
       pip-security-updates:
         applies-to: security-updates
-        update-types: [minor, patch] # Group minor and patch security updates (for major create separate PR)
-    commit-message: {prefix: 'ci(deps-pip): [skip ci]'}
-    reviewers: ['tomassebestik']
-    labels: ['dependencies', 'Status: Reviewing']
-    pull-request-branch-name: {separator: '-'}
-    extend-update-types:
-      - name: 'security'
-        security-severities: ['CRITICAL', 'HIGH'] # Only high severity level security updates
-    insecure-external-code-execution: deny
-
-  # GitHub Actions Version updates
-  - package-ecosystem: github-actions
-    directory: '/'
-    versioning-strategy: increase-if-necessary
-    schedule: {interval: monthly, time: '09:00'}   # First day of the month, time UTC
-    groups:
-      github-actions-version-updates:
+        update-types: [minor, patch]
+      pip-version-updates:
         applies-to: version-updates
-        update-types: [minor] # Group only minor version updates (for major create separate PR, ignore patch)
-    ignore:
-      - dependency-name: '*'
-        update-types: ['version-update:semver-patch'] # Do not update patch versions
-    commit-message: {prefix: 'ci(deps-ci): [skip ci]'}
+        update-types: [minor, patch]
+    commit-message: {prefix: 'ci(dependabot-pip): [skip ci]'}
     reviewers: ['tomassebestik']
     labels: ['dependencies', 'Status: Reviewing']
     pull-request-branch-name: {separator: '-'}
+    open-pull-requests-limit: 2
 
-  # GitHub Actions Security updates
   - package-ecosystem: github-actions
     directory: '/'
-    versioning-strategy: increase-if-necessary
-    schedule: {interval: daily, time: '09:00'}
-    open-pull-requests-limit: 0 # Only security updates
+    schedule: {interval: weekly, day: monday, time: '05:00', timezone: Europe/Prague}
     groups:
       github-actions-security-updates:
         applies-to: security-updates
-        update-types: [minor, patch] # Group minor and patch security updates (for major create separate PR)
-    commit-message: {prefix: 'ci(deps-ci): [skip ci]'}
+        update-types: [minor, patch]
+      github-actions-version-updates:
+        applies-to: version-updates
+        update-types: [minor, patch]
+    commit-message: {prefix: 'ci(dependabot-ci): [skip ci]'}
     reviewers: ['tomassebestik']
     labels: ['dependencies', 'Status: Reviewing']
     pull-request-branch-name: {separator: '-'}
-    extend-update-types:
-      - name: 'security'
-        security-severities: ['CRITICAL', 'HIGH'] # Only high severity level security updates
+    open-pull-requests-limit: 2
