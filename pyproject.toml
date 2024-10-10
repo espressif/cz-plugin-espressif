@@ -30,8 +30,8 @@
     urls.Tracker = "https://github.com/espressif/cz-plugin-espressif/issues/"
 
     dependencies               = ["commitizen>=3.29.0"]
-    optional-dependencies.dev  = ["just-bin~=1.26.0", "pre-commit~=3.3.0", "twine~=5.1.1"]
-    optional-dependencies.test = ["pytest-cov~=4.1.0", "pytest-mock~=3.14.0", "pytest-sugar~=1.0.0", "pytest~=7.4.0", "syrupy~=4.7.0"]
+    optional-dependencies.dev  = ["just-bin>=1.26.0", "pre-commit>=3.3.0", "twine>=5.1.1"]
+    optional-dependencies.test = ["pytest-cov>=4.1.0", "pytest-mock>=3.14.0", "pytest-sugar>=1.0.0", "pytest>=7.4.0", "syrupy>=4.7.0"]
 
 [tool]
     [tool.setuptools]
