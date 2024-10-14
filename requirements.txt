@@ -11,7 +11,7 @@ commitizen==3.29.1        # via czespressif (pyproject.toml)
 decli==0.6.2              # via commitizen
 importlib-metadata==8.5.0  # via commitizen
 jinja2==3.1.4             # via commitizen
-markupsafe==2.1.5         # via jinja2
+markupsafe==3.0.1         # via jinja2
 packaging==24.1           # via commitizen
 prompt-toolkit==3.0.36    # via questionary
 pyyaml==6.0.2             # via commitizen
