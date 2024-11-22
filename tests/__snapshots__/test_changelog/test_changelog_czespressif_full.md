@@ -1,5 +1,5 @@
 <a href="https://www.espressif.com">
-    <img src="czespressif/templates/espressif-logo.svg" align="right" height="20" />
+    <img src="https://www.espressif.com/sites/all/themes/espressif/logo-black.svg" align="right" height="20" />
 </a>
 
 # CHANGELOG
