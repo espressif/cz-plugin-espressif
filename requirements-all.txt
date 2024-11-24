@@ -11,8 +11,8 @@ cffi==1.17.1              # via cryptography
 cfgv==3.4.0               # via pre-commit
 charset-normalizer==3.4.0  # via commitizen, requests
 colorama==0.4.6           # via commitizen
-commitizen==3.30.1        # via czespressif (pyproject.toml)
-coverage==7.6.4           # via pytest-cov
+commitizen==3.31.0        # via czespressif (pyproject.toml)
+coverage==7.6.8           # via pytest-cov
 cryptography==43.0.3      # via secretstorage
 decli==0.6.2              # via commitizen
 distlib==0.3.9            # via virtualenv
@@ -28,7 +28,7 @@ jaraco-context==6.0.1     # via keyring
 jaraco-functools==4.1.0   # via keyring
 jeepney==0.8.0            # via keyring, secretstorage
 jinja2==3.1.4             # via commitizen
-just-bin==1.26.0          # via czespressif (pyproject.toml)
+just-bin==1.36.0          # via czespressif (pyproject.toml)
 keyring==25.5.0           # via twine
 markdown-it-py==3.0.0     # via rich
 markupsafe==3.0.2         # via jinja2
@@ -56,9 +56,9 @@ requests-toolbelt==1.0.0  # via twine
 rfc3986==2.0.0            # via twine
 rich==13.9.4              # via twine
 secretstorage==3.3.3      # via keyring
-syrupy==4.7.2             # via czespressif (pyproject.toml)
+syrupy==4.8.0             # via czespressif (pyproject.toml)
 termcolor==2.5.0          # via commitizen, pytest-sugar
-tomli==2.0.2              # via coverage, pytest
+tomli==2.1.0              # via coverage, pytest
 tomlkit==0.13.2           # via commitizen
 twine==5.1.1              # via czespressif (pyproject.toml)
 typing-extensions==4.12.2  # via rich
