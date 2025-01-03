@@ -2,7 +2,7 @@
     <img src="https://www.espressif.com/sites/all/themes/espressif/logo-black.svg" alt="Espressif logo" title="Espressif" align="right" height="20" />
 </a>
 
-# Commitizen plugin czEspressif
+# Commitizen Plugin `czEspressif`
 
 This is a plugin for Commitizen that makes it easy to create and maintain a well-organized and good-looking `CHANGELOG.md`. It also takes care of version bumping and helps you write commit messages that follow Espressif standards.
 
@@ -21,7 +21,7 @@ All of this with minimal config and setup, so your `pyproject.toml` file stays c
     </a>
     <img alt="Static Badge" src="https://img.shields.io/badge/pip%20install-czespressif-black?logo=python&logoColor=white">
     <a href="/LICENSE">
-      <img alt="Project License" src="https://img.shields.io/pypi/l/czespressif"/>\
+      <img alt="Project License" src="https://img.shields.io/pypi/l/czespressif"/>
     </a>
     <br>
     <img alt="GitHub contributors" src="https://img.shields.io/github/contributors/espressif/cz-plugin-espressif?logo=github&label=Contributors&color=purple">
@@ -76,7 +76,7 @@ All of this with minimal config and setup, so your `pyproject.toml` file stays c
 ## Features
 
 - Can be almost zero-config but offers many customization options if your project needs it.
-- Predefined **CHANGELOG template** with default categories _Breaking changes / New features / Bug fixes / Documentation / Code refactoring / Removals_.
+- Predefined **CHANGELOG template** with default categories _Breaking Changes / New Features / Bug Fixes / Documentation / Code Refactoring / Removals_.
 - The CHANGELOG automatically displays commits and the authors of those commits.
 - The default order in the changelog categories lists commits with a scope first, followed by the rest, both groups sorted alphabetically.
 - Predefined **Release Notes template** that can be used in an automated release workflow.
@@ -133,7 +133,7 @@ cz example
 > In this project's [tests/**snapshots**/test_changelog/](tests/__snapshots__/test_changelog/) directory, we store snapshots used for automated testing. These snapshots **also serve as examples of the plugin's output**.
 > You can explore them and compare the plugin output (`test_changelog_czespressif_*.md`) with the default Commitizen output (`test_changelog_cz_default_*.md`), which is generated when our plugin is not used.
 
-### Create Changelog file
+### Create Changelog File
 
 If a changelog already exists in your project, make sure you have staged or committed its latest version.
 
@@ -143,7 +143,7 @@ This command turns your old changelog into a nicely organized template based on 
 cz changelog
 ```
 
-### Bump Release version
+### Bump Release Version
 
 Is better to first run:
 
@@ -180,7 +180,7 @@ You can check [example without a footer (default)](docs/Release_notes_example.md
 > \[!TIP\]
 > You can check the implementation of this command in the GitHub workflow [.github/workflows/create-release.yml](.github/workflows/create-release.yml) if you're interested.
 
-### Create commit messages
+### Create Commit Messages
 
 In case anyone actually prefers this way of creating commit messages, the command in this plugin is aligned with the Espressif commit linter and DangerJS linters.:
 
@@ -188,7 +188,7 @@ In case anyone actually prefers this way of creating commit messages, the comman
 cz commit
 ```
 
-```
+```txt
 ? Select the type of change you are committing (Use arrow keys)
  » feat                     ✨ A new feature
    fix                      🐛 A bug fix
@@ -201,7 +201,7 @@ cz commit
    remove                   🗑️ Removing code or files
 ```
 
-### Examples of good commit messages
+### Examples of Good Commit Messages
 
 If you are unsure about the commit message standard, run:
 
@@ -217,7 +217,7 @@ This will bring up a complete example of good commit messages and commit schema 
 
 Config is accepted in `pyproject.toml` (priority, following example), `.cz.toml`, `.cz.json`, `cz.json`, `.cz.yaml`, `cz.yaml`, and `cz.toml`.
 
-### Minimal setup
+### Minimal Setup
 
 > \[!TIP\]
 > Try to be minimalistic with custom configs. The best approach is to keep the defaults, so all Espressif projects maintain the same look and feel.
@@ -229,7 +229,7 @@ Config is accepted in `pyproject.toml` (priority, following example), `.cz.toml`
    bump_message              = 'change(bump): release $current_version → $new_version [skip-ci]'
 ```
 
-### Optimal setup
+### Optimal Setup
 
 ```ini
 [tool.commitizen]
@@ -247,7 +247,7 @@ Config is accepted in `pyproject.toml` (priority, following example), `.cz.toml`
 
 ```
 
-### Additional configurable parameters
+### Additional Configurable Parameters
 
 ```ini
 [tool.commitizen]
@@ -289,27 +289,27 @@ Config is accepted in `pyproject.toml` (priority, following example), `.cz.toml`
     # - Change orders in which sections displays in the changelog -
     # Default: this example is default
     change_type_order = [ # with enabled emojis
-        '🚨 Breaking changes',
-        '✨ New features',
-        '🐛 Bug fixes',
+        '🚨 Breaking Changes',
+        '✨ New Features',
+        '🐛 Bug Fixes',
         '📖 Documentation',
-        '🔧 Code refactoring',
+        '🔧 Code Refactoring',
         '🗑️ Removals',
         '🏗️ Changes',  # in default not in the changelog
-        '⚙️ CI and project settings',    # in default not in the changelog
+        '⚙️ CI and Project Settings',    # in default not in the changelog
         '🚦 Testing',  # in default not in the changelog
         '🔙 Reverted',  # in default not in the changelog
     ]
 
     change_type_order = [  # same thing, with disabled emojis
-        'Breaking changes',
-        'New features',
-        'Bug fixes',
+        'Breaking Changes',
+        'New Features',
+        'Bug Fixes',
         'Documentation',
-        'Code refactoring',
+        'Code Refactoring',
         'Removals',
         'Changes',  # in default not in the changelog
-        'CI and project settings',  # in default not in the changelog
+        'CI and Project Settings',  # in default not in the changelog
         'Testing',  # in default not in the changelog
         'Reverted',  # in default not in the changelog
     ]
@@ -375,7 +375,7 @@ fi
 
 ---
 
-## Pre-commit hook (beta)
+## Pre-Commit Hook (Beta)
 
 To automatically keep your changelog's "Unreleased" section up to date, add the following to your `.pre-commit-config.yaml` file:
 

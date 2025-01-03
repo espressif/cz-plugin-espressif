@@ -17,7 +17,7 @@ TYPES: list[dict] = [  # this is order in changelog
     {
         'type': 'feat',
         'description': 'A new feature',
-        'heading': 'New features',
+        'heading': 'New Features',
         'emoji': '✨',
         'bump': 'MINOR',
         'changelog': True,
@@ -25,7 +25,7 @@ TYPES: list[dict] = [  # this is order in changelog
     {
         'type': 'fix',
         'description': 'A bug fix',
-        'heading': 'Bug fixes',
+        'heading': 'Bug Fixes',
         'emoji': '🐛',
         'bump': 'PATCH',
         'changelog': True,
@@ -41,7 +41,7 @@ TYPES: list[dict] = [  # this is order in changelog
     {
         'type': 'refactor',
         'description': 'A changeset neither fixing a bug nor adding a feature',
-        'heading': 'Code refactoring',
+        'heading': 'Code Refactoring',
         'emoji': '🔧',
         'bump': 'PATCH',
         'changelog': True,
@@ -65,7 +65,7 @@ TYPES: list[dict] = [  # this is order in changelog
     {
         'type': 'ci',
         'description': 'Changes to CI configuration files and scripts',
-        'heading': 'CI and project settings',
+        'heading': 'CI and Project Settings',
         'emoji': '⚙️',
         'bump': 'PATCH',
         'changelog': False,
