@@ -22,12 +22,12 @@
 
 ## v1.3.0 (2024-08-30)
 
-### New features
+### New Features
 
 - **api**: rollback changes to JWT token handling *(Alice Johnson - b5e7a2d)*
 - **ui**: improve loading animations for dashboard page *(Diana White - c5d3e7a)*
 
-### Bug fixes
+### Bug Fixes
 
 - **logging**: switch from console logs to structured JSON logging *(Eve Martin - d9b2c7e)*
 - correct typos in error messages displayed on UI *(Bob Smith - b7a4c5b)*
@@ -36,7 +36,7 @@
 
 ## v1.2.0 (2024-07-15)
 
-### Code refactoring
+### Code Refactoring
 
 - optimize database queries for user data retrieval *(Charlie Green - e7c1d8b)*
 
@@ -44,7 +44,7 @@
 
 ## v1.2.0.rc0 (2024-06-10)
 
-### Bug fixes
+### Bug Fixes
 
 - **frontend**: correct layout issues in user profile page *(Bob Smith - c3e7b3b)*
 
@@ -56,7 +56,7 @@
 
 ## v1.1.0 (2024-05-23)
 
-### Bug fixes
+### Bug Fixes
 
 - **api**: update response codes for failed logins *(Bob Smith - 1b7d1e7)*
 
@@ -76,11 +76,11 @@
 
 ## v0.2.1 (2024-03-29)
 
-### New features
+### New Features
 
 - **api**: implement new authentication mechanism with JWT tokens *(Alice Johnson - b2c7e8a)*
 
-### Bug fixes
+### Bug Fixes
 
 - resolve null pointer exception in user session management *(Bob Smith - 4b1d62b)*
 
@@ -88,11 +88,11 @@
 
 ## v0.2.0 (2024-03-02)
 
-### New features
+### New Features
 
 - **api**: implement new authentication mechanism with JWT tokens *(Alice Johnson - b2c7e8a)*
 
-### Bug fixes
+### Bug Fixes
 
 - resolve null pointer exception in user session management *(Bob Smith - 4b1d62b)*
 

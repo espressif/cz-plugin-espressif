@@ -1,9 +1,9 @@
-### ✨ New features
+### ✨ New Features
 
 - **test_esptool**: Added test for embedded and detected flash size match _(Jakub Kocka - c0ea74a)_
 - **spi_connection**: Support --spi-connection on all chips _(radim.karnis - 1a38293)_
 
-### 🐛 Bug fixes
+### 🐛 Bug Fixes
 
 - **esp32c2**: Added get_flash_cap and get_flash_vendor _(Jakub Kocka - b8dd74d)_
 - **testloadram**: Windows assertion error _(Jakub Kocka - cd51bbc)_
