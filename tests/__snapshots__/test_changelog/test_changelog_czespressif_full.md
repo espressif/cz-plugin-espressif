@@ -106,8 +106,6 @@
     <small>
         <b>
             <a href="https://www.github.com/espressif/cz-plugin-espressif">Commitizen Espressif plugin</a>
-            ·
-            <a href="https://www.github.com/espressif/standards">Espressif Standards</a>
         </b>
     <br>
         <sup><a href="https://www.espressif.com">Espressif Systems CO LTD. (2025)</a><sup>
