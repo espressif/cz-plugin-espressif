@@ -4,18 +4,18 @@
 #
 #    pip-compile --allow-unsafe --annotation-style=line --output-file=requirements.txt --strip-extras
 #
-argcomplete==3.5.1        # via commitizen
-charset-normalizer==3.4.0  # via commitizen
+argcomplete==3.5.3        # via commitizen
+charset-normalizer==3.4.1  # via commitizen
 colorama==0.4.6           # via commitizen
 commitizen==3.30.1        # via czespressif (pyproject.toml)
 decli==0.6.2              # via commitizen
 importlib-metadata==8.5.0  # via commitizen
-jinja2==3.1.4             # via commitizen
+jinja2==3.1.5             # via commitizen
 markupsafe==3.0.2         # via jinja2
 packaging==24.2           # via commitizen
 prompt-toolkit==3.0.48    # via questionary
 pyyaml==6.0.2             # via commitizen
-questionary==2.0.1        # via commitizen
+questionary==2.1.0        # via commitizen
 termcolor==2.5.0          # via commitizen
 tomlkit==0.13.2           # via commitizen
 wcwidth==0.2.13           # via prompt-toolkit
