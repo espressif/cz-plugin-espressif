@@ -100,7 +100,7 @@ jobs:
       fail-fast: true
       matrix:
         python-version: ['3.9', '3.10', '3.11', '3.12']
-        os: [macos-12, macos-14] # macOS 12 (Intel),macOS 14 (Apple Silicon)
+        os: [macos-13, macos-latest] # macOS 13 (Intel),macOS-latest (Apple Silicon)
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout repository
