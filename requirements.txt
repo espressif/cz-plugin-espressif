@@ -13,7 +13,7 @@ importlib-metadata==8.5.0  # via commitizen
 jinja2==3.1.4             # via commitizen
 markupsafe==3.0.2         # via jinja2
 packaging==24.2           # via commitizen
-prompt-toolkit==3.0.48    # via questionary
+prompt-toolkit==3.0.36    # via questionary
 pyyaml==6.0.2             # via commitizen
 questionary==2.0.1        # via commitizen
 termcolor==2.5.0          # via commitizen
