@@ -20,6 +20,14 @@
 </div>
 <hr>
 
+## v1.3.1 (2025-01-13)
+
+### 🐛 Bug Fixes
+
+- **changelog**: fix logo link in changelog header *(Tomas Sebestik - dfd72ea)*
+- Capitalize first letter in headings *(Peter Dragun - 174e039)*
+- Update shields to link directly to desired website *(Peter Dragun - 9e2c54c)*
+
 ## v1.3.0 (2024-10-07)
 
 ### ✨ New Features
