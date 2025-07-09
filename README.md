@@ -10,7 +10,7 @@ All of this with minimal config and setup, so your `pyproject.toml` file stays c
 
 <!-- GitHub Badges -->
 
-<div align="center">
+<div style="text-align: center">
   <p>
     <hr>
     <a href="https://github.com/espressif/cz-plugin-espressif/releases">
