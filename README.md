@@ -51,22 +51,22 @@ All of this with minimal config and setup, so your `pyproject.toml` file stays c
   <hr>
 </div>
 
-- [Commitizen plugin czEspressif](#commitizen-plugin-czespressif)
+- [Commitizen Plugin `czEspressif`](#commitizen-plugin-czespressif)
   - [Features](#features)
   - [Compatibility](#compatibility)
   - [Install](#install)
   - [Usage](#usage)
-    - [Create Changelog file](#create-changelog-file)
-    - [Bump Release version](#bump-release-version)
+    - [Create Changelog File](#create-changelog-file)
+    - [Bump Release Version](#bump-release-version)
     - [GitHub Action for Automated Release Creation](#github-action-for-automated-release-creation)
-    - [Create commit messages](#create-commit-messages)
-    - [Examples of good commit messages](#examples-of-good-commit-messages)
+    - [Create Commit Messages](#create-commit-messages)
+    - [Examples of Good Commit Messages](#examples-of-good-commit-messages)
   - [Configuration](#configuration)
-    - [Minimal setup](#minimal-setup)
-    - [Optimal setup](#optimal-setup)
-    - [Additional configurable parameters](#additional-configurable-parameters)
+    - [Minimal Setup](#minimal-setup)
+    - [Optimal Setup](#optimal-setup)
+    - [Additional Configurable Parameters](#additional-configurable-parameters)
   - [Solving Troubles](#solving-troubles)
-  - [Pre-commit hook (beta)](#pre-commit-hook-beta)
+  - [Pre-Commit Hook (Beta)](#pre-commit-hook-beta)
   - [Contributing](#contributing)
   - [License](#license)
   - [Credits](#credits)
@@ -120,9 +120,14 @@ cz example
 >
 > commitizen itself is in the plugin's dependencies, so pip will take care of everything.
 
-> \[!WARNING\]
-> Don't try to install it system-wide with `pipx`; it likely won't work as expected.
-> (This option will be explored in the future, and once a solution is found, we will update this recommendation.)
+To use the plugin system-wide, you can install it with `pipx`:
+
+```sh
+pipx install commitizen
+pipx inject commitizen czespressif
+```
+
+This will install `czespressif` as a plugin for the global `commitizen` installation, allowing you to use it in any project without needing to install it separately for each one.
 
 ---
 
