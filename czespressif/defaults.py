@@ -31,6 +31,14 @@ TYPES: list[dict] = [  # this is order in changelog
         'changelog': True,
     },
     {
+        'type': 'perf',
+        'description': 'A code change that improves performance',
+        'heading': 'Performance Improvements',
+        'emoji': '⚡',
+        'bump': 'PATCH',
+        'changelog': True,
+    },
+    {
         'type': 'docs',
         'description': 'Documentation only change',
         'heading': 'Documentation',
