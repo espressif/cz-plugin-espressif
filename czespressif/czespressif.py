@@ -7,8 +7,8 @@ from collections import OrderedDict
 from collections.abc import Iterable
 from typing import Any
 
+from commitizen.config import BaseConfig
 from commitizen.cz.base import BaseCommitizen
-from commitizen.cz.base import BaseConfig
 from commitizen.defaults import Questions
 from jinja2 import PackageLoader
 
