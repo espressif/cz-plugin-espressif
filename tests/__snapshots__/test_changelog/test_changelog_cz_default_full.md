@@ -12,15 +12,13 @@
 
 ## v1.2.0 (2024-07-15)
 
-### Refactor
-
-- optimize database queries for user data retrieval
-
-## v1.2.0.rc0 (2024-06-10)
-
 ### Fix
 
 - **frontend**: correct layout issues in user profile page
+
+### Refactor
+
+- optimize database queries for user data retrieval
 
 ## v1.1.0 (2024-05-23)
 

@@ -36,14 +36,6 @@
 
 ## v1.2.0 (2024-07-15)
 
-### Code Refactoring
-
-- optimize database queries for user data retrieval *(Charlie Green - e7c1d8b)*
-
----
-
-## v1.2.0.rc0 (2024-06-10)
-
 ### Bug Fixes
 
 - **frontend**: correct layout issues in user profile page *(Bob Smith - c3e7b3b)*
@@ -51,6 +43,10 @@
 ### Documentation
 
 - update API documentation for user endpoint *(Eve Martin - f8d7e1c)*
+
+### Code Refactoring
+
+- optimize database queries for user data retrieval *(Charlie Green - e7c1d8b)*
 
 ---
 
@@ -108,7 +104,7 @@
             <a href="https://www.github.com/espressif/cz-plugin-espressif">Commitizen Espressif plugin</a>
         </b>
     <br>
-        <sup><a href="https://www.espressif.com">Espressif Systems CO LTD. (2025)</a><sup>
+        <sup><a href="https://www.espressif.com">Espressif Systems CO LTD. (2026)</a><sup>
     </small>
 </div>
 
