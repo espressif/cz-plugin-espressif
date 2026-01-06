@@ -20,6 +20,12 @@
 </div>
 <hr>
 
+## v1.3.2 (2026-01-06)
+
+### 🐛 Bug Fixes
+
+- Use original path for BaseConfig import *(Peter Dragun - 91f338e)*
+
 ## v1.3.1 (2025-01-13)
 
 ### 🐛 Bug Fixes
