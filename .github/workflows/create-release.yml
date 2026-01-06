@@ -69,17 +69,19 @@ jobs:
         with:
           path: ./release-assets
 
-      - uses: getsentry/action-setup-venv@v2.1.0
-        id: venv
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-          cache-dependency-path: dist/*.whl
-          install-cmd: pip install --require-virtualenv $(find release-assets -name "*.whl")
+          cache: pip
 
-      - name: Install plugin from wheel
+      - name: Create virtual env and install plugin from wheel
         run: |
+          python -m venv venv
+          source venv/bin/activate
+          pip install --require-virtualenv --upgrade pip
           for whl in $(find release-assets -name "*.whl"); do
-            python -m pip install --require-virtualenv "$whl" || echo "Failed to install $whl"
+            pip install --require-virtualenv "$whl" || echo "Failed to install $whl"
           done
 
       - name: Add pyproject.toml with set plugin
@@ -89,6 +91,7 @@ jobs:
 
       - name: Test plugin functions
         run: |
+          source venv/bin/activate
           cz info | grep -q "Commitizen plugin for Espressif Systems" || exit 1
           cz example | grep -q "github.com/espressif" || exit 1
 
@@ -113,17 +116,19 @@ jobs:
         with:
           path: ./release-assets
 
-      - uses: getsentry/action-setup-venv@v2.1.0
-        id: venv
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-          cache-dependency-path: dist/*.whl
-          install-cmd: pip install --require-virtualenv $(find release-assets -name "*.whl")
+          cache: pip
 
-      - name: Install plugin from wheel
+      - name: Create virtual env and install plugin from wheel
         run: |
+          python -m venv venv
+          source venv/bin/activate
+          pip install --require-virtualenv --upgrade pip
           for whl in $(find release-assets -name "*.whl"); do
-            python -m pip install --require-virtualenv "$whl" || echo "Failed to install $whl"
+            pip install --require-virtualenv "$whl" || echo "Failed to install $whl"
           done
 
       - name: Add pyproject.toml with set plugin
@@ -133,6 +138,7 @@ jobs:
 
       - name: Test plugin functions
         run: |
+          source venv/bin/activate
           cz info | grep -q "Commitizen plugin for Espressif Systems" || exit 1
           cz example | grep -q "github.com/espressif" || exit 1
 
