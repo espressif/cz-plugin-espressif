@@ -7,7 +7,7 @@
 > All notable changes to this project are documented in this file.
 > This list is not exhaustive - only important changes, fixes, and new features in the code are reflected here.
 
-<div align="center">
+<div style="text-align: center;">
     <a href="https://keepachangelog.com/en/1.1.0/">
         <img alt="Static Badge" src="https://img.shields.io/badge/Keep%20a%20Changelog-v1.1.0-salmon?logo=keepachangelog&logoColor=black&labelColor=white&link=https%3A%2F%2Fkeepachangelog.com%2Fen%2F1.1.0%2F">
     </a>
@@ -98,7 +98,7 @@
 
 ---
 
-<div align="center">
+<div style="text-align: center;">
     <small>
         <b>
             <a href="https://www.github.com/espressif/cz-plugin-espressif">Commitizen Espressif plugin</a>
