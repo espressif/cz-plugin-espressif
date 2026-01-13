@@ -12,7 +12,7 @@ repos:
       - id: check-useless-excludes
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.6.0
+    rev: v6.0.0
     hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
@@ -22,33 +22,33 @@ repos:
         args: ['-f=lf']
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.6.8
+    rev: v0.14.11
     hooks:
       - id: ruff
         args: [--fix, --exit-non-zero-on-fix]
       - id: ruff-format
 
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.11.2
+    rev: v1.19.1
     hooks:
       - id: mypy
         args: ['--config-file', 'pyproject.toml']
         exclude: 'tests/'
 
   - repo: https://github.com/espressif/conventional-precommit-linter
-    rev: v1.10.0
+    rev: v1.11.0
     hooks:
       - id: conventional-precommit-linter
 
   - repo: https://github.com/codespell-project/codespell
-    rev: v2.3.0
+    rev: v2.4.1
     hooks:
       - id: codespell
         args: ['--write-changes']
         additional_dependencies: [tomli]
 
   - repo: https://github.com/executablebooks/mdformat
-    rev: 0.7.17
+    rev: 0.7.22  # 1.0.0 requires python 3.10
     hooks:
       - id: mdformat
         args: [--number]
@@ -67,12 +67,12 @@ repos:
         exclude: 'tests/'
 
   - repo: https://github.com/lyz-code/yamlfix/
-    rev: 1.17.0
+    rev: 1.19.1
     hooks:
       - id: yamlfix
 
   - repo: https://github.com/jazzband/pip-tools
-    rev: '7.4.1'
+    rev: 'v7.5.2'
     hooks:
       - id: pip-compile
         name: pip-compile requirements.txt # Only project.dependencies
