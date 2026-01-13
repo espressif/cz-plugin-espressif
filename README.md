@@ -297,6 +297,7 @@ Config is accepted in `pyproject.toml` (priority, following example), `.cz.toml`
         '🚨 Breaking Changes',
         '✨ New Features',
         '🐛 Bug Fixes',
+        '⚡ Performance Improvements',
         '📖 Documentation',
         '🔧 Code Refactoring',
         '🗑️ Removals',
@@ -310,6 +311,7 @@ Config is accepted in `pyproject.toml` (priority, following example), `.cz.toml`
         'Breaking Changes',
         'New Features',
         'Bug Fixes',
+        'Performance Improvements',
         'Documentation',
         'Code Refactoring',
         'Removals',
@@ -322,7 +324,7 @@ Config is accepted in `pyproject.toml` (priority, following example), `.cz.toml`
     # - Redefine which types are shown in the changelog -
     # Note: You need to list here ALL types that you want to have in the changelog - included default ones
     # Note: The order in this list doesn't matter — if you want to change the sections' order too, use with "change_type_order."
-    types_in_changelog = ["feat", "fix", "refactor", "style", "ci"]
+    types_in_changelog = ["feat", "fix", "refactor", "style", "ci", "perf"]
 
 
     # - Custom text that you can append to release notes output -
