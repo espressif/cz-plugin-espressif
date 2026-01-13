@@ -16,6 +16,7 @@ Commit types in this project:
 
   feat: A new feature
   fix: A bug fix
+  perf: A code change that improves performance
   docs: Documentation only change
   refactor: A changeset neither fixing a bug nor adding a feature
   remove: Removing code or files
