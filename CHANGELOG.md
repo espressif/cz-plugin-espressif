@@ -20,6 +20,16 @@
 </div>
 <hr>
 
+## v1.4.0 (2026-01-13)
+
+### ✨ New Features
+
+- support perf by default in changelog *(Fu Hanxi - 661f006)*
+
+### 📖 Documentation
+
+- provide pipx injection as system-wide solution *(Fu Hanxi - 5f715e7)*
+
 ## v1.3.4 (2026-01-07)
 
 ## v1.3.3 (2026-01-07)
