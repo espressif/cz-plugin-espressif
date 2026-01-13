@@ -170,7 +170,7 @@ class CzPluginEspressif(BaseCommitizen):  # pylint: disable=abstract-method
         return examples
 
     def schema(self) -> str:
-        return '<type>(<scope>): <subject>\n' '<BLANK LINE>\n' '<body>\n' '<BLANK LINE>\n' '(BREAKING CHANGE: <breaking changes>)*\n' '(<footers>)*'
+        return '<type>(<scope>): <subject>\n<BLANK LINE>\n<body>\n<BLANK LINE>\n(BREAKING CHANGE: <breaking changes>)*\n(<footers>)*'
 
     def schema_pattern(self) -> str:
         pattern = (

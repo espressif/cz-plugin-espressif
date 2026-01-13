@@ -1,6 +1,6 @@
 # Contributing and Development
 
-> \[!NOTE\]
+> [!NOTE]
 > This project supports Python 3.9 as the minimum version. All development should be done in the minimum supported version to ensure compatibility.
 > Automated tests should prevent compatibility issues (as they are tested on all versions and platforms), but save yourself potential trouble.
 
@@ -144,7 +144,7 @@ Please ensure that your PR is complete before requesting a review (or switching 
 
 There is a Pull Request template to help guide you in writing a proper PR description.
 
-> \[!IMPORTANT\]
+> [!IMPORTANT]
 > Incomplete PRs can't be reviewed — please be respectful of the reviewers' time and avoid submitting incomplete work.
 
 ---

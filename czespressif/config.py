@@ -55,7 +55,7 @@ class CommitType:
         elif isinstance(other, str):
             other_type = other.lower()
         else:
-            return NotImplemented
+            raise NotImplementedError
         return (self.type.lower() > other_type) - (self.type.lower() < other_type)
 
     @classmethod

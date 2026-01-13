@@ -115,7 +115,7 @@ And verify that installation and setup was successful by showing the example.
 cz example
 ```
 
-> \[!TIP\]
+> [!TIP]
 > You can also add it to your project `dev` dependencies (suggested) and run the sync command (`pipenv sync`, `pip-sync`, `poetry install`, ...).
 >
 > commitizen itself is in the plugin's dependencies, so pip will take care of everything.
@@ -133,7 +133,7 @@ This will install `czespressif` as a plugin for the global `commitizen` installa
 
 ## Usage
 
-> \[!TIP\]
+> [!TIP]
 > You can check the implementation of this command in the GitHub workflow [.github/workflows/create-release.yml](.github/workflows/create-release.yml) if you're interested.
 > In this project's [tests/**snapshots**/test_changelog/](tests/__snapshots__/test_changelog/) directory, we store snapshots used for automated testing. These snapshots **also serve as examples of the plugin's output**.
 > You can explore them and compare the plugin output (`test_changelog_czespressif_*.md`) with the default Commitizen output (`test_changelog_cz_default_*.md`), which is generated when our plugin is not used.
@@ -176,13 +176,13 @@ cz changelog v4.8.0 --template="RELEASE_NOTES.md.j2" --file-name="Release_notes.
 
 You can check [example without a footer (default)](docs/Release_notes_example.md) and [example with a custom footer](docs/Release_notes_example_with_footer.md).
 
-> \[!IMPORTANT\]
+> [!IMPORTANT]
 > Note that the custom template for release notes is part of the czespressif plugin, not the target (your project) repository.
 > Any custom settings you define for the changelog locally in the project configuration will also apply to the release notes. For example, if you change the order of sections in the changelog, the release notes will reflect that change as well.
 >
 > This approach ensures consistent visual styling and allows repository admins to configure everything in one place.
 
-> \[!TIP\]
+> [!TIP]
 > You can check the implementation of this command in the GitHub workflow [.github/workflows/create-release.yml](.github/workflows/create-release.yml) if you're interested.
 
 ### Create Commit Messages
@@ -224,7 +224,7 @@ Config is accepted in `pyproject.toml` (priority, following example), `.cz.toml`
 
 ### Minimal Setup
 
-> \[!TIP\]
+> [!TIP]
 > Try to be minimalistic with custom configs. The best approach is to keep the defaults, so all Espressif projects maintain the same look and feel.
 > Also, you will save yourself troubles with non-standard setups.
 
@@ -375,7 +375,7 @@ else
 fi
 ```
 
-> \[!TIP\]
+> [!TIP]
 > For each Python project, use a virtual environment. If you install everything with pip to the system Python, you risk running into unsolvable dependency issues and possibly breaking some system tools.
 >
 > If your project isn’t a Python project and you don’t care about python virtual envs, at least ensure you don’t have multiple outdated versions of some Python packages, such as commitizen in this case.
