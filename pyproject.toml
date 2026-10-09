@@ -1,12 +1,11 @@
 [build-system]
     build-backend = "setuptools.build_meta"
-    requires      = ["setuptools>=64"]
+    requires      = ["setuptools>=77"]
 
 [project]
     authors = [{ name = "Espressif Systems" }, { name = "Tomas Sebestik", email = "tomas.sebestik@espressif.com" }]
     classifiers = [
         "Intended Audience :: Developers",
-        "License :: OSI Approved :: Apache Software License",
         "Natural Language :: English",
         "Operating System :: MacOS :: MacOS X",
         "Operating System :: Microsoft :: Windows",
@@ -20,7 +19,8 @@
     description = "Commitizen plugin with Espressif code style"
     dynamic = ["version"]
     entry-points."commitizen.plugin".czespressif = "czespressif:CzPluginEspressif"
-    license = { text = "Apache 2.0" }
+    license = "Apache-2.0"
+    license-files = ["LICENSE"]
     name = "czespressif"
     readme = "README.md"
     requires-python = ">=3.9"
