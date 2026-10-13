@@ -37,6 +37,7 @@
     [tool.setuptools]
         dynamic.version          = { attr = "czespressif.__init__.__version__" }
         package-data.czespressif = ["*.py", "templates/*"]
+        packages.find.include    = ["czespressif*"]
         packages.find.where      = ["."]
 
     [tool.codespell]
