@@ -237,7 +237,7 @@ jobs:
           cz changelog ${{ steps.release_version.outputs.VERSION }} --file-name RELEASE_NOTES.md
 
       - name: Sign the dists with Sigstore
-        uses: sigstore/gh-action-sigstore-python@v3.0.0
+        uses: sigstore/gh-action-sigstore-python@v3.3.0
         with:
           inputs: >-
             ./release-assets/*.tar.gz
